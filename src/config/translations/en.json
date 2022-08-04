@@ -1,0 +1,4 @@
+{
+    "commonExceptionMessage": "Unable to process your request. Please try again later.",
+    "unAuthenticateUserExceptionMessage": "Please, Login to authenticate your self."
+}

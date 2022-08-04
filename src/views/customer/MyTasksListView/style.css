@@ -1,0 +1,45 @@
+.collapse-icon {
+    text-align: right;
+}
+.collapse-icon-right {
+    text-align: left;
+}
+.tasklist-grid{
+    transition:  .5s;
+}
+.hide {
+    visibility: hidden;
+}
+.task-variable-section .MuiAccordionSummary-content{
+    display: none;
+}
+.task-variable-section .MuiAccordionSummary-root{
+    text-align: center;
+    min-height: 0;
+}
+.task-variable-section .MuiIconButton-root{
+    padding: 0;
+}
+
+.task-variable-section .MuiAccordionSummary-root.Mui-expanded{
+    min-height: 0px;
+}
+.task-variable-section.MuiAccordion-root{
+    box-shadow: none;
+}
+.task-variable-list .MuiTypography-root .MuiTypography-colorTextSecondary{
+    display: flex;
+}
+.task-variable-list .MuiTypography-root span:nth-child(2){
+    flex: 1;
+    text-align: right;
+}
+.sorting-section{
+    text-align: right;
+}
+.sorting-section button {
+    font-size: 12px;
+}
+.sorting-section span svg {
+    margin-top: 6px;
+}

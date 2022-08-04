@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: case-ui
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: case-ui
+  template:
+    metadata:
+      labels:
+        name: case-ui
+    spec:
+      containers:
+      - image: tsdevopsteam/platform:tp-case-ui-$BUILD_NUMBER
+        name: case-ui
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: ts-platform
+
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: case-ui
+  namespace: dev
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+  selector:
+    name: case-ui
+

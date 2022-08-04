@@ -1,0 +1,86 @@
+@import '../../../../../../../../scss/variables/colors';
+@import '../../../../../../../../scss/common';
+
+.rcw-message {
+  margin: 10px;
+  display: flex;
+  word-wrap: break-word;
+}
+
+.rcw-timestamp {
+  font-size: 10px;
+  margin-right: 4px;
+}
+
+.rcw-client {
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+  align-items: center;
+  max-width: 90%;
+
+  .rcw-message-text {
+    // @include message-bubble($turqois-2);
+    background-color: #fff;
+    box-shadow: -17px -5px 50px 0px rgba(237,220,237,1);
+    padding: 10px;
+    font-size: 10px;
+    font-weight: normal;
+    color: #121212;
+    max-width: 78%;
+    border-radius: 10px 10px 0 10px;
+  }
+}
+
+.rcw-response {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  max-width: 90%;
+
+  .rcw-message-text {
+    // @include message-bubble($grey-2);
+    background-color: #fff;
+    box-shadow: -17px -5px 50px 0px rgba(237,220,237,1);
+    padding: 10px;
+    font-size: 10px;
+    font-weight: normal;
+    color: #121212;
+    max-width: 78%;
+    border-radius: 10px 10px 10px 0px;
+  }
+}
+
+/* For markdown elements created with default styles */
+.sc-message--avatar{
+  background-image: url(https://d13yacurqjgara.cloudfront.net/assets/avatar-default-aa2eab7684294781f93bc99ad394a0eb3249c5768c21390163c9f55ea8ef83a4.gif);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  min-width: 20px;
+  min-height: 20px;
+  border-radius: 50%;
+  align-self: center;
+  margin-right: 10px;
+  margin-left: 10px;
+  background-color: #000;
+}
+.rcw-message-text {
+  p {
+    margin: 0;
+    padding: 3px 4px;
+    font-size: 12px;
+  }
+
+  img {
+    width: 100%;
+    object-fit: contain;
+  }
+}
+
+.rcw-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  margin-right: 10px;
+}

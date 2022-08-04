@@ -1,0 +1,8 @@
+{
+  "realm": "techsophy-platform",
+  "auth-server-url": "https://keycloak-tsplatform.techsophy.com/auth",
+  "ssl-required": "none",
+  "resource": "tp-ui-core",
+  "public-client": true,
+  "confidential-port": 0
+}

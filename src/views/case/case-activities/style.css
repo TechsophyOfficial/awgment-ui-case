@@ -1,0 +1,49 @@
+.activiti-option{
+    cursor: pointer;
+    display: flex;
+    margin-right: 3px;
+    flex: 1;
+    align-items: center;
+}
+.activiti{
+text-align: right;
+}
+.activiti .activiti-main{
+    display: inline-block;
+    margin-right: 10px;
+}
+.activiti-option .MuiIcon-root{
+    font-size: 18px;
+    margin-right: 2px;
+}
+.activiti-option .MuiSvgIcon-fontSizeInherit{
+    width: 20px;
+}
+.activiti-option .MuiTypography-caption{
+    font-size: 12px;
+    font-weight: 500;
+}
+.activiti-task-details {
+    border-left: 1px solid #D6D6D6;
+    min-height: 300px;
+    height: 100%;
+}
+.activiti-task-details .MuiBox-root{
+    /* { borderBottom: '1px solid #80808040', padding: '14px' } */
+    border-bottom: 1px solid #d6d6d6;
+    padding: 14px;
+}
+.activiti-task-details h5{
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 500;
+    color: #000;
+}
+.activiti-dialog-content .MuiAccordionSummary-root{
+    border-bottom: 1px solid #d6d6d6;
+}
+
+.activiti-dialog-content .MuiGrid-container{
+    position: absolute;
+    height: 100%;
+}

@@ -1,0 +1,104 @@
+@import '../../../../../../scss/variables/colors';
+@import '../../../../../../scss/common';
+
+.rcw-conversation-container {
+
+  .rcw-header {
+    background-color: $turqois-1;
+    border-radius:0 0 10px 10px;
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    padding: 5px 15px;
+  }
+  .rcw-header>div:nth-child(1){
+    flex: 1;
+  }
+
+  .rcw-title {
+    font-size: 14px;
+    margin: 0;
+    padding: 0px 0;
+    flex: 1;
+    font-weight: 500;
+    display: inline-block;
+    line-height: 16px;
+  }
+  .rcw-title span {
+    font-size: 10px;
+    font-weight: 400;
+    float: right;
+  }
+  .sc-header--close-button {
+    width: 30px;
+    align-self: center;
+    height: 30px;
+    margin-right: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: #000;
+    position: relative;
+}
+.sc-header--close-button img{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+  .rcw-close-button {
+    display: none;
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+}
+
+.rcw-full-screen {
+
+  .rcw-header {
+    @include header-fs;
+  }
+
+  .rcw-title {
+    @include title-fs;
+  }
+
+  .rcw-close-button {
+    @include close-button-fs;
+  }
+
+  .rcw-close {
+    @include close-fs;
+  }
+}
+
+@media screen and (max-width: 800px) {
+
+  .rcw-conversation-container {
+
+    .rcw-header {
+      @include header-fs;
+    }
+
+    .rcw-title {
+      @include title-fs;
+    }
+
+    .rcw-close-button {
+      @include close-button-fs;
+    }
+
+    .rcw-close {
+      @include close-fs;
+    }
+  }
+}

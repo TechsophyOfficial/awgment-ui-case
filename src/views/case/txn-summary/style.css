@@ -1,0 +1,43 @@
+.card-wrapper {
+    background-color: #e9ecef85;
+    max-height: 110px;
+    padding: 0px;
+    display: flex;
+    /* overflow-x : auto */
+    /* position: static; */
+}
+.card-wrapper-underley{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    overflow: hidden;
+}
+.card-overlay{
+    visibility: hidden;
+    position: absolute;
+    z-index: 888;
+}
+.card-overlay.active , .card-overlay:hover{
+    /* visibility: visible; */
+    visibility: visible;
+    z-index: 1200;
+    background-color: #fff;
+    filter: drop-shadow(0px 2px 20px rgba(44, 152, 240, 0.7));
+}
+.card-wrapper::-webkit-scrollbar {    display: none;}
+.MuiStepLabel-label.MuiStepLabel-alternativeLabel{
+    margin-top: 5px;
+}
+.MuiStep-alternativeLabel .MuiStepConnector-alternativeLabel{
+    left: calc(-50% + 8px);
+    right: calc(50% + 8px);
+}
+.card-wrap:hover + .card-overlay{
+    visibility: visible;
+    z-index: 1200;
+    background-color: #fff;
+    filter: drop-shadow(0px 2px 20px rgba(44, 152, 240, 0.7));
+}
