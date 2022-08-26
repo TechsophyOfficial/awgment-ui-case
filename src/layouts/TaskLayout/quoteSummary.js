@@ -18,7 +18,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Moment from 'react-moment';
 import Loader from './loader';
 import { TXN_STATE_VARIABLE } from '../../variables/chatWidget'
-import { createComment, getCommentsList, getQuoteSummary } from 'src/services/camundaService';
+import { getQuoteSummary } from 'src/services/camundaService';
 
 
 const columns = [

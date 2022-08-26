@@ -1,24 +1,20 @@
 import request from "./HTTP";
-import {
-  CHECKLIST_INSTANCE,
-  CHECKLIST_ITEM_INSTANCE,
-} from "../constants/endpoints";
 
-export const CHECKLIST_INSTANCE_ENDPOINT = `${process.env.REACT_APP_API_GATEWAY_URL}${CHECKLIST_INSTANCE}`;
-export const CHECKLIST_ITEM_INSTANCE_ENDPOINT = `${process.env.REACT_APP_API_GATEWAY_URL}${CHECKLIST_ITEM_INSTANCE}`;
+// export const CHECKLIST_INSTANCE_ENDPOINT = `${appData.apiGatewayUrl}${CHECKLIST_INSTANCE}`;
+// export const CHECKLIST_ITEM_INSTANCE_ENDPOINT = `${appData.apiGatewayUrl}${CHECKLIST_ITEM_INSTANCE}`;
 
-export const getChecklistInstances = async () => {
-  const r = await request.get(CHECKLIST_INSTANCE_ENDPOINT);
-  if (r.success) {
-    const data = r.data;
-    return { success: true, message: r.message, data: data };
-  }
-  return { success: false, message: r.message };
-};
+// export const getChecklistInstances = async () => {
+//   const r = await request.get(CHECKLIST_INSTANCE_ENDPOINT);
+//   if (r.success) {
+//     const data = r.data;
+//     return { success: true, message: r.message, data: data };
+//   }
+//   return { success: false, message: r.message };
+// };
 
-export const getChecklistItemInstanceById = async (id) => {
+export const getChecklistItemInstanceById = async (url, id) => {
   const r = await request.get(
-    `${CHECKLIST_ITEM_INSTANCE_ENDPOINT}?checklist-instance-id=${id}`
+    `${url}?checklist-instance-id=${id}`
   );
   if (r.success) {
     const data = r.data;
@@ -27,9 +23,9 @@ export const getChecklistItemInstanceById = async (id) => {
   return { success: false, message: r.message };
 };
 
-export const completeChecklistItemInstances = async (data) => {
+export const completeChecklistItemInstances = async (url, data) => {
   const r = await request.put(
-    `${CHECKLIST_ITEM_INSTANCE_ENDPOINT}/complete`,
+    `${url}/complete`,
     data
   );
   if (r.success) {

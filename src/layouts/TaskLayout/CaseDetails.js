@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import PropTypes, { func } from "prop-types";
 import { Box, Card, makeStyles } from "@material-ui/core";
 import CaseActivities from "../../views/case/case-activities";
@@ -33,6 +33,7 @@ import TOAST_MESSAGES from "src/variables/toastMessages";
 import { displayErrorToast, displaySuccessToast } from "src/helpers/toast";
 import QuoteSummary from "./quoteSummary";
 import FormLayout from "./FormLayout";
+import AppConfig from "src/appConfig";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -100,6 +101,7 @@ const CaseDetails = ({ className, selectedTask, onTaskComplet, ...rest }) => {
   const [caseDetails, setCaseDetails] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
 
+  const appData = useContext(AppConfig)
   useEffect(() => {
     setLoading(true);
     getCaseDetails();
@@ -108,7 +110,8 @@ const CaseDetails = ({ className, selectedTask, onTaskComplet, ...rest }) => {
   // fetch the case details using case instance id
   function getCaseDetails() {
     if (selectedTask && selectedTask.caseInstanceId) {
-      getCaseInstance(selectedTask.caseInstanceId).then((response) => {
+      const BASE_URL = `${appData.apiServerURL}`;
+      getCaseInstance(selectedTask.caseInstanceId, BASE_URL).then((response) => {
         if (response.success) {
           if (response.data) {
             setCaseDetails(response.data);
@@ -158,7 +161,8 @@ const CaseDetails = ({ className, selectedTask, onTaskComplet, ...rest }) => {
   // complete the selected task
   const completeSelectedTask = () => {
     if (selectedTask) {
-      completeTask(selectedTask.id).then((response) => {
+      const BASE_URL = `${appData.apiServerURL}`;
+      completeTask(selectedTask.id, BASE_URL).then((response) => {
         if (response.success) {
           displaySuccessToast(TOAST_MESSAGES.SUCCESS.TASK_COMPLETED);
           onTaskComplet();
@@ -199,8 +203,8 @@ const CaseDetails = ({ className, selectedTask, onTaskComplet, ...rest }) => {
         taskId: selectedTask.id,
         assignee: localStorage.getItem("currentUser"),
       };
-
-      claimTask(selectedTask.id, body).then((response) => {
+      const GATEWAY_URL = `${appData.apiGatewayUrl}`;
+      claimTask(selectedTask.id, body, GATEWAY_URL).then((response) => {
         if (response.success) {
           onTaskComplet();
           setAnchorEl(null);

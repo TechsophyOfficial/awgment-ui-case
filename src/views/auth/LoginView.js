@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -15,6 +15,7 @@ import {
 import Page from '../../components/Page';
 import { getConfig } from 'src/services/common';
 // import config from './config.js'
+import AppConfig from 'src/appConfig';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,9 +29,11 @@ const useStyles = makeStyles((theme) => ({
 const LoginView = () => {
   const classes = useStyles();
   const navigate = useNavigate();
+  const appData = useContext(AppConfig);
 
  function onSubmit() {
-   getConfig().then(response => {
+  const BASE_URL = `${appData.customApiServerUrl}`
+   getConfig(BASE_URL).then(response => {
      if(response.success){
       const configData = JSON.parse(response.data);
       sessionStorage.setItem('config' , JSON.stringify(configData));

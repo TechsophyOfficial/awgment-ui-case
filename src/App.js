@@ -8,7 +8,7 @@ import routes from 'src/routes';
 import { useNavigate } from 'react-router-dom';
 import config from './views/auth/config.js';
 import { KeycloakProvider } from '@react-keycloak/web';
-import keycloak from './keycloak';
+// import keycloak from './keycloak';
 import './App.css';
 import { Provider } from 'react-redux';
 import store from './redux/store.js';
@@ -16,14 +16,20 @@ import { getConfig } from './services/common.js';
 import { createBrowserHistory } from 'history';
 import Navigator from './Navigator.js';
 import ContextProvider from './ContextProvider.js';
+import AppConfig from './appConfig.js';
+import { useKeycloak } from '@react-keycloak/web';
 
 const defaultHistory = createBrowserHistory();
 
-const App = ({ history = defaultHistory }) => {
+const App = (props) => {
+  const envConfig = props.config;
+  const history = props.history ? props.history : defaultHistory;
+
   // const routing = useRoutes(routes);
   // const navigate = useNavigate();
   const [configuration, setConfiguration] = useState(null);
   const [token, setToken] = useState(false);
+  const { keycloak } = useKeycloak();
 
   useEffect(() => {
     if (!configuration) {
@@ -110,17 +116,18 @@ const App = ({ history = defaultHistory }) => {
   }
 
   return (
-      <ContextProvider>
-
+    <ContextProvider config={envConfig}>
       <GlobalStyles />
       {/* <KeycloakProvider keycloak={keycloak} initConfig={{ onLoad: 'login-required' }} onEvent={(event) => handleEvent(event)}> */}
-        <Provider store={store}>
-          <BrowserRouter>
-            <Navigator history={history} />
-          </BrowserRouter>
-        </Provider>
+      <Provider store={store}>
+        <BrowserRouter>
+          <AppConfig.Provider value={envConfig}>
+            <Navigator history={history} config={envConfig} />
+          </AppConfig.Provider>
+        </BrowserRouter>
+      </Provider>
       {/* </KeycloakProvider> */}
-      </ContextProvider>
+    </ContextProvider>
   );
 };
 

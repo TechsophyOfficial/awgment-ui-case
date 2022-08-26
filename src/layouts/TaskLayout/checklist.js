@@ -8,6 +8,10 @@ import {
 } from "../../services/checklistService";
 import { Box, Paper, Toolbar, Button } from "@mui/material";
 import DataTable from "../../components/DataTable";
+import {
+  CHECKLIST_ITEM_INSTANCE,
+} from "../../constants/endpoints";
+import AppConfig from "src/appConfig";
 
 const MyChecklists = ({ selectedTask }) => {
   const useStyles = makeStyles((theme) => ({
@@ -53,11 +57,14 @@ const MyChecklists = ({ selectedTask }) => {
   const classes = useStyles();
   const [checklistItemIntances, setChecklistItemIntances] = useState([]);
   const [selectedChecklistItems, setSelectedChecklistItems] = useState([]);
+  const appData = useContext(AppConfig);
 
   const fetchChecklistItemInstanceById = async () => {
     const { checklistInstanceId } = selectedTask;
     if (checklistInstanceId) {
+      const CHECKLIST_ITEM_INSTANCE_ENDPOINT = `${appData.apiGatewayUrl}${CHECKLIST_ITEM_INSTANCE}`;
       const { success, message, data } = await getChecklistItemInstanceById(
+        CHECKLIST_ITEM_INSTANCE_ENDPOINT,
         checklistInstanceId
       );
       if (success && data) {
@@ -99,7 +106,8 @@ const MyChecklists = ({ selectedTask }) => {
   }, [selectedTask]);
 
   const onCompleteChecklistItemInstances = async () => {
-    const { success, message = "" } = await completeChecklistItemInstances({
+    const CHECKLIST_ITEM_INSTANCE_ENDPOINT = `${appData.apiGatewayUrl}${CHECKLIST_ITEM_INSTANCE}`;
+    const { success, message = "" } = await completeChecklistItemInstances(CHECKLIST_ITEM_INSTANCE_ENDPOINT, {
       idList: selectedChecklistItems,
     });
     if (success) {

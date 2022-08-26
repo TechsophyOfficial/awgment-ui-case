@@ -14,6 +14,7 @@ import FolderSharedIcon from '@material-ui/icons/FolderShared';
 import './style.css';
 import ActivitiTasksDialog from './ActivitiTasks';
 import { getCaseActivitiTasks } from 'src/services/camundaService';
+import AppConfig from 'src/appConfig';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default class CaseActivities extends Component {
-
+    static contextType = AppConfig
     constructor(props) {
         super(props);
         this.state = {
@@ -49,7 +50,8 @@ export default class CaseActivities extends Component {
 
     getCaseActivitiTaskList(activitiType = '') {
         if (this.state.caseInstanceId) {
-            getCaseActivitiTasks(this.state.caseInstanceId).then(response => {
+            const BASE_URL = `${this.context.apiServerURL}`;
+            getCaseActivitiTasks(this.state.caseInstanceId, BASE_URL).then(response => {
                 if(response.success) {
                     this.setActivitiTasks(response.data , activitiType);
                 }

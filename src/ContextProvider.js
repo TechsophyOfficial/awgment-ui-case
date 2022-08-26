@@ -10,20 +10,26 @@ import {
   getPreferenceThemeId,
   getSelectedTheme,
 } from "./services/ThemeService";
+import { PREFERENCE_ENDPOINT, THEME_ENDPOINT } from '../src/constants/endpoints'
 
-const ContextProvider = ({ children }) => {
+const ContextProvider = ({ children, config }) => {
   const { theme, updateTheme } = useContext(ThemeContext);
+
 
   useEffect(() => {
     const setTheme = () => {
       // const selectedThemeRes = await getSelectedTheme();
-      getPreferenceThemeId().then((response) => {
-        getSelectedTheme(response.data).then((selectedThemeRes) => {
-          if (selectedThemeRes.success) {
-            const selectedTheme = selectedThemeRes.data;
-            updateTheme(selectedTheme);
-          }
-        });
+      const PREFERENCE_API_ENDPOINT = `${config.apiGatewayUrl}${PREFERENCE_ENDPOINT}`;
+      const THEME_API_ENDPOINT = `${config.apiGatewayUrl}${THEME_ENDPOINT}`;
+      getPreferenceThemeId(PREFERENCE_API_ENDPOINT).then((response) => {
+        if (response.success) {
+          getSelectedTheme(response?.data, THEME_API_ENDPOINT).then((selectedThemeRes) => {
+            if (selectedThemeRes.success) {
+              const selectedTheme = selectedThemeRes.data;
+              updateTheme(selectedTheme);
+            }
+          });
+        }
       });
     };
     setTheme();

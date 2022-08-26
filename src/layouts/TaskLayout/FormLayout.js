@@ -25,6 +25,7 @@ import TsfFormioForm from "tsf_react_formio/dist/components/tsfFormioForm";
 import "./style.css";
 import { displaySuccessToast, displayErrorToast } from "src/helpers/toast";
 import TOAST_MESSAGES from "src/variables/toastMessages";
+import AppConfig from "src/appConfig";
 
 const useStyles = (theme) => ({
   formControl: {
@@ -37,6 +38,7 @@ const useStyles = (theme) => ({
 });
 
 class FormLayout extends Component {
+  static contextType = AppConfig
   constructor(props) {
     super(props);
     this.handleSubmit.bind(this);
@@ -82,7 +84,8 @@ class FormLayout extends Component {
   }
 
   getFormVariableDetails() {
-    getFormVariables(this.props.taskId).then((response) => {
+    const GATEWAY_URL = `${this.context.apiGatewayUrl}`;
+    getFormVariables(this.props.taskId, GATEWAY_URL).then((response) => {
       if (response.success) {
         console.log(response.data);
         this.setState({
@@ -96,7 +99,8 @@ class FormLayout extends Component {
     this.setState({
       loading: true,
     });
-    getTaskForm(this.props.formKey).then((response) => {
+    const GATEWAY_URL = `${this.context.apiGatewayUrl}`;
+    getTaskForm(this.props.formKey, GATEWAY_URL).then((response) => {
       if (response.success) {
         this.setState({
           formDetails: response.data?.data,
@@ -117,7 +121,8 @@ class FormLayout extends Component {
 
   completeSelectedTask(taskId) {
     if (taskId) {
-      completeTask(this.props.taskId).then((response) => {
+      const BASE_URL = `${this.context.apiServerURL}`;
+      completeTask(this.props.taskId, BASE_URL).then((response) => {
         if (response.success) {
           window.location.reload();
         }
@@ -131,7 +136,8 @@ class FormLayout extends Component {
       loading: true,
     });
     if (data) {
-      saveTaskForm(this.props.taskId, data).then((response) => {
+      const GATEWAY_URL = `${this.context.apiGatewayUrl}`;
+      saveTaskForm(this.props.taskId, data, GATEWAY_URL).then((response) => {
         console.log(response);
         if (response.success) {
           displaySuccessToast(TOAST_MESSAGES.SUCCESS.FORM_SUBMITTED);

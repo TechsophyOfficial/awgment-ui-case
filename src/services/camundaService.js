@@ -25,10 +25,13 @@ import { HISTORY_API_TIME_INTERVAL } from "src/variables/chatWidget";
 
 // import Cookies from 'helpers/Cookies';
 
-const BASE_URL = `${process.env.REACT_APP_SERVER_URL}`;
-const GATEWAY_URL = `${process.env.REACT_APP_API_GATEWAY_URL}`;
+// const BASE_URL = `${process.env.REACT_APP_SERVER_URL}`;
+// const GATEWAY_URL = `${process.env.REACT_APP_API_GATEWAY_URL}`;
 
-export function getTask(taskId) {
+// const BASE_URL = `${appData.apiServerURL}`;
+// const GATEWAY_URL = `${appData.apiGatewayUrl}`;
+
+export function getTask(BASE_URL, taskId) {
   return invokeApiCall({
     endPoint: BASE_URL + TASK + `/${taskId}`,
     apiParams: {},
@@ -91,7 +94,7 @@ export function getTasksCount(url, data) {
   );
 }
 
-export function getFilterList() {
+export function getFilterList(BASE_URL) {
   return invokeApiCall({
     endPoint:
       BASE_URL + FILTER + "?owner=" + localStorage.getItem("currentUser"),
@@ -113,7 +116,7 @@ export function getFilterList() {
   );
 }
 
-export function getFilter(filterId) {
+export function getFilter(filterId, GATEWAY_URL) {
   return invokeApiCall({
     endPoint: GATEWAY_URL + WORKFLOW_FILTER + "/" + filterId,
     apiParams: {},
@@ -134,7 +137,7 @@ export function getFilter(filterId) {
   );
 }
 
-export function createFilter(data) {
+export function createFilter(data, GATEWAY_URL) {
   return invokeApiCall({
     endPoint: GATEWAY_URL + WORKFLOW_FILTER + "/create",
     apiParams: data,
@@ -155,7 +158,7 @@ export function createFilter(data) {
   );
 }
 
-export function updateFilter(id, data) {
+export function updateFilter(id, data, BASE_URL) {
   return invokeApiCall({
     endPoint: BASE_URL + FILTER + `/${id}`,
     apiParams: data,
@@ -176,7 +179,7 @@ export function updateFilter(id, data) {
   );
 }
 
-export function deleteFilter(filterId) {
+export function deleteFilter(filterId, BASE_URL) {
   return invokeApiCall({
     endPoint: BASE_URL + FILTER + "/" + filterId,
     apiParams: {},
@@ -197,7 +200,7 @@ export function deleteFilter(filterId) {
   );
 }
 
-export function getFilterTasksCount(filterId, data) {
+export function getFilterTasksCount(filterId, data, GATEWAY_URL) {
   return invokeApiCall({
     endPoint: GATEWAY_URL + WORKFLOW_FILTER + "/" + filterId + "/count",
     apiParams: data,
@@ -218,7 +221,7 @@ export function getFilterTasksCount(filterId, data) {
   );
 }
 
-export function getFilterTasks(filterId, data, queryParam) {
+export function getFilterTasks(filterId, data, queryParam, BASE_URL) {
   return invokeApiCall({
     endPoint: BASE_URL + FILTER + "/" + filterId + `/list?${queryParam}`,
     apiParams: data,
@@ -239,7 +242,7 @@ export function getFilterTasks(filterId, data, queryParam) {
   );
 }
 
-export function getCaseDefinition(id) {
+export function getCaseDefinition(id, BASE_URL) {
   return invokeApiCall({
     endPoint: BASE_URL + CASE_DEFINITION + `/${id}`,
     apiParams: {},
@@ -260,28 +263,28 @@ export function getCaseDefinition(id) {
   );
 }
 
-export function getHistoryCaseInstance(id) {
-  return invokeApiCall({
-    endPoint: BASE_URL + HISTORY_CASE_INSTANCE + `/${id}`,
-    apiParams: {},
-    requestType: GET,
-    setAccessToken: true,
-  }).then(
-    ({
-      success,
-      data: responseData,
-      showInlineAlerts = false,
-      errors,
-    } = {}) => {
-      if (success) {
-        return { success, data: responseData };
-      }
-      return { success, errors, showInlineAlerts };
-    }
-  );
-}
+// export function getHistoryCaseInstance(id) {
+//   return invokeApiCall({
+//     endPoint: BASE_URL + HISTORY_CASE_INSTANCE + `/${id}`,
+//     apiParams: {},
+//     requestType: GET,
+//     setAccessToken: true,
+//   }).then(
+//     ({
+//       success,
+//       data: responseData,
+//       showInlineAlerts = false,
+//       errors,
+//     } = {}) => {
+//       if (success) {
+//         return { success, data: responseData };
+//       }
+//       return { success, errors, showInlineAlerts };
+//     }
+//   );
+// }
 
-export function getCaseInstance(id) {
+export function getCaseInstance(id, BASE_URL) {
   return invokeApiCall({
     endPoint: BASE_URL + CASE_INSTANCE + `/${id}`,
     apiParams: {},
@@ -302,7 +305,7 @@ export function getCaseInstance(id) {
   );
 }
 
-export function getCaseVariables(id) {
+export function getCaseVariables(id, BASE_URL) {
   return invokeApiCall({
     endPoint: BASE_URL + CASE_INSTANCE + `/${id}/variables`,
     apiParams: {},
@@ -323,7 +326,7 @@ export function getCaseVariables(id) {
   );
 }
 
-export function getTaskForm(id) {
+export function getTaskForm(id, GATEWAY_URL) {
   return invokeApiCall({
     endPoint: GATEWAY_URL + RUNTIME_FORM + `${id}`,
     apiParams: {},
@@ -344,7 +347,7 @@ export function getTaskForm(id) {
   );
 }
 
-export function getFormVariables(id) {
+export function getFormVariables(id, GATEWAY_URL) {
   return invokeApiCall({
     endPoint: GATEWAY_URL + WORKFLOW + `/${id}` + FORM_VARIABLES,
     apiParams: {},
@@ -365,7 +368,7 @@ export function getFormVariables(id) {
   );
 }
 
-export function saveTaskForm(taskId, data) {
+export function saveTaskForm(taskId, data, GATEWAY_URL) {
   let reBody = {
     taskId,
     variables: data,
@@ -390,7 +393,7 @@ export function saveTaskForm(taskId, data) {
   );
 }
 
-export function completeTask(id) {
+export function completeTask(id, BASE_URL) {
   return invokeApiCall({
     endPoint: BASE_URL + `/task/${id}/complete`,
     apiParams: {},
@@ -411,7 +414,7 @@ export function completeTask(id) {
   );
 }
 
-export function claimTask(id, body) {
+export function claimTask(id, body, GATEWAY_URL) {
   return invokeApiCall({
     endPoint: GATEWAY_URL + `/workflow/v1/engine-rest/task/{id}/claim`,
     apiParams: body,
@@ -432,26 +435,26 @@ export function claimTask(id, body) {
   );
 }
 
-export function getCommentsList(id) {
-  return invokeApiCall({
-    endPoint: GATEWAY_URL + WORKFLOW_COMMENTS + { id },
-    apiParams: {},
-    requestType: GET,
-    setAccessToken: true,
-  }).then(
-    ({
-      success,
-      data: responseData,
-      showInlineAlerts = false,
-      errors,
-    } = {}) => {
-      if (success) {
-        return { success, data: responseData };
-      }
-      return { success, errors, showInlineAlerts };
-    }
-  );
-}
+// export function getCommentsList(id, GATEWAY_URL) {
+//   return invokeApiCall({
+//     endPoint: GATEWAY_URL + WORKFLOW_COMMENTS + { id },
+//     apiParams: {},
+//     requestType: GET,
+//     setAccessToken: true,
+//   }).then(
+//     ({
+//       success,
+//       data: responseData,
+//       showInlineAlerts = false,
+//       errors,
+//     } = {}) => {
+//       if (success) {
+//         return { success, data: responseData };
+//       }
+//       return { success, errors, showInlineAlerts };
+//     }
+//   );
+// }
 
 export function getQuoteSummary() {
   // return quoteSummaryApiResponse;
@@ -471,7 +474,7 @@ export function getQuoteSummary() {
   // });
 }
 
-export function createComment(id, data) {
+export function createComment(id, data, GATEWAY_URL) {
   return invokeApiCall({
     endPoint: GATEWAY_URL + `/workflow/v1/comments`,
     apiParams: data,
@@ -492,7 +495,7 @@ export function createComment(id, data) {
   );
 }
 
-export function manualStartActiviti(id, data) {
+export function manualStartActiviti(id, data, BASE_URL) {
   return invokeApiCall({
     endPoint: BASE_URL + CASE_EXECUTION + `/${id}/manual-start`,
     apiParams: data,
@@ -513,7 +516,7 @@ export function manualStartActiviti(id, data) {
   );
 }
 
-export function getCaseActivitiTasks(id) {
+export function getCaseActivitiTasks(id, BASE_URL) {
   return invokeApiCall({
     endPoint: BASE_URL + CASE_ACTIVITI_TASKS + `${id}`,
     apiParams: {},

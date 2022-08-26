@@ -26,8 +26,10 @@ import http from '../../services/HTTP';
 import { triggerJourney, getConversationHistory, submitMessage } from 'src/services/sxpService';
 import { displayErrorToast, displaySuccessToast } from 'src/helpers/toast';
 import { getCaseInstance } from 'src/services/camundaService';
+import AppConfig from "src/appConfig";
 
 class Conversation extends Component {
+    static contextType = AppConfig;
     constructor() {
         super();
         this.state = {
@@ -128,7 +130,8 @@ class Conversation extends Component {
     // get case details 
     caseDetails() {
         if (this.props.selectedTask) {
-            getCaseInstance(this.props.selectedTask.caseInstanceId).then(response => {
+            const BASE_URL = `${this.context.appServerURL}`;
+            getCaseInstance(this.props.selectedTask.caseInstanceId, BASE_URL).then(response => {
                 if (response.success && response.data) {
                     this.setState({
                         caseDetails: response.data
@@ -386,7 +389,8 @@ class Conversation extends Component {
         const pathVariables = this.getPathVariables(businessKey, user);
 
         if (pathVariables) {
-            getConversationHistory(pathVariables).then(response => {
+            const BASE_URL2 = `${this.contextType.contextEngineApiUrl}`
+            getConversationHistory(BASE_URL2 ,pathVariables).then(response => {
                 if (response && response.success) {
                     this.clearWidgetMessages(widgetId);
                     this.setMessageFormate(response.data, widgetId)
@@ -476,7 +480,8 @@ class Conversation extends Component {
     }
 
     sendMessage(requestBody) {
-        submitMessage(requestBody).then(response => {
+        const BASE_URL = `${this.contextType.customApiServerUrl}`
+        submitMessage(BASE_URL, requestBody).then(response => {
             if (response.success) {
                 this.setState({
                     openAddSeller: false
@@ -624,7 +629,8 @@ class Conversation extends Component {
     }
 
     startJouney(requestBody, chatId) {
-        triggerJourney(requestBody).then(response => {
+        const BASE_URL = `${this.contextType.customApiServerUrl}`
+        triggerJourney(BASE_URL, requestBody).then(response => {
             if(response.success){
                 if(requestBody?.variables?.journeyName){
                    let msg = this.getJourneyName(requestBody?.variables?.journeyName, chatId);

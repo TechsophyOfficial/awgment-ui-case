@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -35,6 +35,7 @@ import TaskDetail from '../../../views/task/task-detail';
 import { manualStartActiviti, completeTask, claimTask, getTask } from 'src/services/camundaService';
 import { displaySuccessToast } from 'src/helpers/toast';
 import TOAST_MESSAGES from 'src/variables/toastMessages';
+import AppConfig from 'src/appConfig';
 
 
 const useStyles = makeStyles(() => ({
@@ -62,14 +63,15 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const Tasks = ({ list, status, onGetTask, refreshTasks }) => {
+const Tasks = ({ list, status, onGetTask, refreshTasks, appData }) => {
     function getTaskForm(task) {
         onGetTask(task);
     }
 
     function startActiviti(task) {
         if (task.caseExecutionId) {
-            manualStartActiviti(task.caseExecutionId , {}).then(response => {
+            const BASE_URL = `${appData.appServerURL}`;
+            manualStartActiviti(task.caseExecutionId , {}, BASE_URL).then(response => {
                     displaySuccessToast(TOAST_MESSAGES.SUCCESS.ACTIVITI_STARTED)  
                     refreshTasks('available');
             })
@@ -135,8 +137,7 @@ const ActivitiTasksDialog = ({ isOpen, dialogData, isEdit, openStatus, onTaskCom
     const [open, setOpen] = React.useState(false);
     const [taskId, setTaskId] = useState(null);
     const [taskDetails, setTaskDetails] = useState(null);
-
-
+    const appData = useContext(AppConfig)
 
     useEffect(() => {
         setOpen(isOpen);
@@ -162,7 +163,8 @@ const ActivitiTasksDialog = ({ isOpen, dialogData, isEdit, openStatus, onTaskCom
 
     function completeSelectedTask() {
         if (taskId) {
-            completeTask(this.props.taskId).then(response => {
+            const BASE_URL = `${appData.appServerURL}`;
+            completeTask(this.props.taskId, BASE_URL).then(response => {
                 if (response.success) {
                     onTaskComplet();
                 }
@@ -175,7 +177,8 @@ const ActivitiTasksDialog = ({ isOpen, dialogData, isEdit, openStatus, onTaskCom
             let body = {
                 "userId": localStorage.getItem('currentUser')
             }
-            claimTask(this.props.taskId, body).then(response => {
+            const GATEWAY_URL = `${appData.apiGatewayUrl}`;
+            claimTask(this.props.taskId, body, GATEWAY_URL).then(response => {
                 if (response.success) {
                     onTaskComplet();
                 }
@@ -188,7 +191,8 @@ const ActivitiTasksDialog = ({ isOpen, dialogData, isEdit, openStatus, onTaskCom
     }
 
     function getTaskDetails(taskId) {
-        getTask(this.props.taskId).then(response => {
+        const BASE_URL = `${appData.appServerURL}`;
+        getTask(BASE_URL, this.props.taskId).then(response => {
             if (response.success) {
                 setTaskDetails(response.data);
             }
@@ -214,7 +218,7 @@ const ActivitiTasksDialog = ({ isOpen, dialogData, isEdit, openStatus, onTaskCom
                                     <Typography>{dialogData.fullTitle}</Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
-                                    <Tasks list={dialogData.list} status={dialogData.status} onGetTask={onGetTask} refreshTasks={refreshTaskList}/>
+                                    <Tasks list={dialogData.list} status={dialogData.status} onGetTask={onGetTask} refreshTasks={refreshTaskList} appData={appData}/>
                                 </AccordionDetails>
                             </Accordion>
                         </Grid>
