@@ -4,7 +4,7 @@
     "keyCloakUrl": "https://keycloak-tsplatform.techsophy.com/",
     "keyCloakRealm": "techsophy-platform",
     "keyCloakClientId": "tp-ui-core",
-    "publicUrl": "model/case-inbox",
+    "publicUrl": "/model/case-inbox",
     "publicUrlUiCase": "model/case-inbox",
     "socketUrl": "https://sxp.channel-adapter.k8s.techsophy.com/",
     "socketPath": "/socket.io/",

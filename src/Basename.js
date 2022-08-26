@@ -4,5 +4,5 @@ export default function Basename({ currentLocation = window.location.href }, con
         const url = currentLocation.includes(container) ? container : config?.publicUrl;
         return url;
     }
-    return config?.publicUrl;
+    return config?.publicUrl ? config?.publicUrl : "model/case-inbox";
 }
