@@ -32,6 +32,14 @@ The following are the features of **Case Inbox** Module.
 
 2. Go to the checked out project folder and run the command `npm install` 
 
+
+## Docker build and run
+docker build . -t awgment-ui-case
+
+docker run -it -p 8181:80 --env-file docker.env awgment-ui-case:latest
+
+curl localhost:8181/case-inbox/config.json
+
 ## Available Scripts
 
 In the project directory, you can run:
