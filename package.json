@@ -25,6 +25,7 @@
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.8",
     "axios": "^0.20.0",
+    "caniuse-lite": "^1.0.30001390",
     "chart.js": "^2.9.3",
     "classnames": "^2.2.6",
     "clsx": "^1.1.1",
