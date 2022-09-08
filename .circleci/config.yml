@@ -8,7 +8,7 @@ workflows:
 jobs:
   makeUI:
     docker:
-     - image: circleci/node:14.20.0-browsers
+     - image: cimg/node:14.20.0-browsers
     
     steps:
       - checkout
