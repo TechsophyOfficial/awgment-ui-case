@@ -3,7 +3,7 @@ version: 2.1
 workflows:
   tagged-release: 
     jobs:
-      - releaseUI:
+      - buildUI:
           context: ossContext
           filters:
             tags:
@@ -11,7 +11,7 @@ workflows:
             branches:
               ignore: /.*/
 jobs:
-  releaseUI:
+  buildUI:
     docker:
      - image: cimg/node:14.20.0-browsers
   
