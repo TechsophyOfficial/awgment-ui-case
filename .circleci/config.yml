@@ -1,43 +1,46 @@
 version: 2.1
 
 workflows:
-   ui-deploy: 
-      jobs:
-        - makeUI:
+  tagged-release: 
+    jobs:
+      - releaseUI:
+          context: ossContext
           filters:
             tags:
               only: /^v.*/
             branches:
               ignore: /.*/
-
 jobs:
-  makeUI:
+  releaseUI:
     docker:
-      - image: cimg/node:14.20.0-browsers
+     - image: cimg/node:14.20.0-browsers
     
     steps:
       - checkout
       - restore_cache: 
           keys: 
-            - v1-dependencies-{{ checksum "package.json" }}
-      - run: npm install
+            - v1-dependencies-{{ checksum "package.json" }} 
+      - run: npm install 
       - save_cache:
           key: v1-dependencies-{{ checksum "package.json" }}
           paths:
              - node_modules
              - ~/.npm
              - ~/.cache
-      - run: npm run build
-     
+      - run:
+          command: | 
+            echo $CI
+            TMP_CI=$CI
+            CI=""
+            npm run build
+            CI=$TMP_CI
       - setup_remote_docker
-      - run: |
-          docker build . -t $REPONAME
-      # - run: |
-      #     if [[ -z "$CIRCLE_TAG" ]] ;  then exit 1; fi
-      #     TAG=$CIRCLE_TAG
-      #     echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-      #     REPONAME = $CIRCLE_PROJECT_REPONAME
-      #     docker build . -t $DOCKER_USER/$REPONAME:$TAG
-      #     #docker tag $REPONAME:latest $DOCKER_USER/$REPONAME:$TAG
-      #     #docker push $DOCKER_USER/$REPONAME:$TAG
-      
+      - run: 
+          name: Publish Docker Image to Docker Hub
+          command: |
+           if [[ -z "$CIRCLE_TAG" ]] ;  then exit 1; fi
+            TAG=$CIRCLE_TAG
+           echo $TS_DOCKER_PUB_PASS | docker login -u $TS_DOCKER_PUB_USR --password-stdin
+           REPONAME=$TS_DOCKER_PUB_USR/$CIRCLE_PROJECT_REPONAME
+           docker build -t $REPONAME:$TAG . 
+           docker push $REPONAME:$TAG
