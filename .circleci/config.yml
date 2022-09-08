@@ -3,12 +3,17 @@ version: 2.1
 workflows:
    ui-deploy: 
       jobs:
-        - makeUI
+        - makeUI:
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
 
 jobs:
   makeUI:
     docker:
-     - image: cimg/node:14.20.0-browsers
+      - image: cimg/node:14.20.0-browsers
     
     steps:
       - checkout
