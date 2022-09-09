@@ -17,6 +17,9 @@ spec:
       containers:
       - image: tsdevopsteam/platform:tp-case-ui-$BUILD_NUMBER
         name: case-ui
+        envFrom:
+        - configMapRef:
+            name: caseui-env
         ports:
         - containerPort: 80
       imagePullSecrets:
