@@ -4,10 +4,10 @@
   "private": true,
   "homepage": "/case-inbox",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test  --env=jsdom --coverage --collectCoverageFrom=src/**/*js --collectCoverageFrom=!src/components/sxp-chat2/**/*js --collectCoverageFrom=!src/components/sxp-chat2/**/*.test.js",
-    "eject": "react-scripts eject"
+    "start": "PUBLIC_URL=/case-inbox craco start --no-cache",
+    "build": "PUBLIC_URL=/case-inbox craco build",
+    "test": "craco test  --env=jsdom --coverage --collectCoverageFrom=src/**/*js --collectCoverageFrom=!src/components/sxp-chat2/**/*js --collectCoverageFrom=!src/components/sxp-chat2/**/*.test.js",
+    "eject": "craco eject"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
@@ -25,9 +25,11 @@
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.8",
     "axios": "^0.20.0",
+    "caniuse-lite": "^1.0.30001390",
     "chart.js": "^2.9.3",
     "classnames": "^2.2.6",
     "clsx": "^1.1.1",
+    "craco-less": "^1.17.0",
     "date-fns": "^2.11.1",
     "emoji-js": "^3.2.2",
     "formik": "^2.1.5",

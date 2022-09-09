@@ -4,14 +4,11 @@ import { GET } from 'src/constants/requestTypes';
 import { CASE_EVENT, CONVERSATION_HISTORY } from 'src/constants/endpoints';
 import { displayErrorToast } from 'src/helpers/toast';
 
-const BASE_URL = `${process.env.REACT_APP_CUSTOM_API_SERVER_URL}`
-const BASE_URL2 = `${process.env.REACT_APP_CONTEXT_ENGINE_API_URL}`
 
-
-export function triggerJourney(data) {
+export function triggerJourney(url, data) {
     return invokeApiCall({
       requestType: POST,
-      endPoint: BASE_URL + CASE_EVENT,
+      endPoint: url + CASE_EVENT,
       apiParams: data,
       shouldShowSuccessMessage : false,
       shouldShowErrorMessage : false,     
@@ -30,9 +27,9 @@ export function triggerJourney(data) {
     });
   }
 
-  export function submitMessage(data) {
+  export function submitMessage(url,data) {
     return invokeApiCall({
-      endPoint: BASE_URL + CASE_EVENT,
+      endPoint: url + CASE_EVENT,
       apiParams: data,
       shouldShowSuccessMessage : false,
       shouldShowSuccessMessage : false,
@@ -54,9 +51,9 @@ export function triggerJourney(data) {
     });
   }
 
-  export function getConversationHistory(data) {
+  export function getConversationHistory(url, data) {
     return invokeApiCall({
-      endPoint: BASE_URL2 + CONVERSATION_HISTORY + data,
+      endPoint: url + CONVERSATION_HISTORY + data,
       apiParams: {},
       shouldShowSuccessMessage : false,
       shouldShowSuccessMessage : false,

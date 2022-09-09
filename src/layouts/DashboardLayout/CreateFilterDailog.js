@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import PropTypes, { func, element } from 'prop-types';
 import {
@@ -43,7 +43,7 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 import { useDispatch } from 'react-redux';
 import { refreshFilters } from 'src/redux/actions';
 import { getFilter, deleteFilter, updateFilter, createFilter } from 'src/services/camundaService';
-
+import AppConfig from 'src/appConfig';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -188,6 +188,7 @@ const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
 
     const dispatch = useDispatch();
 
+    const appData = useContext(AppConfig)
     const groupBy = (array, key) => {
         // Return the end result
         return array.reduce((result, currentValue) => {
@@ -411,7 +412,8 @@ const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
     function createNewfilter() {
         const query = generateQuery();
         if (query) {
-            createFilter(query).then(response => {
+            const GATEWAY_URL = `${appData.apiGatewayUrl}`;
+            createFilter(query, GATEWAY_URL).then(response => {
                 if (response.success) {
                     openStatus(false);
                     setOpen(false);
@@ -427,7 +429,8 @@ const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
     function updateFilterDetails() {
         const query = generateQuery();
         if (query && edit) {
-            updateFilter(edit, query).then(response => {
+            const BASE_URL = `${appData.apiServerURL}`;
+            updateFilter(edit, query, BASE_URL).then(response => {
                 if (response.success) {
                     openStatus(false);
                     setOpen(false);
@@ -443,7 +446,8 @@ const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
 
     function getFilterDetails() {
         if (edit) {
-            getFilter(isEdit).then(response => {
+            const GATEWAY_URL = `${appData.apiGatewayUrl}`;
+            getFilter(isEdit, GATEWAY_URL).then(response => {
                 if (response.success && response.data) {
                     let filter = response.data;
                     setName(filter.name);
@@ -504,7 +508,8 @@ const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
     function handleDelete() {
         if (edit) {
             setLoading(true);
-            deleteFilter(edit).then(response => {
+            const BASE_URL = `${appData.apiServerURL}`;
+            deleteFilter(edit, BASE_URL).then(response => {
                 if (response.success) {
                     openStatus(false);
                     setOpen(false);
