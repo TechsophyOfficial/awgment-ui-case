@@ -11,6 +11,7 @@ const defaultHistory = createBrowserHistory();
 const KeycloakWrapper = (props) => {
     // !--------- REMOVE KEYCLOAK CODE -------------
     const config = props.config;
+    console.log("<Keycloak wraper /> /> config", config)
     const history = props.history ? props.history : defaultHistory;
 
     const keycloak = new Keycloak({

@@ -23,6 +23,7 @@ const defaultHistory = createBrowserHistory();
 
 const App = (props) => {
   const envConfig = props.config;
+  console.log("<App /> config", envConfig)
   const history = props.history ? props.history : defaultHistory;
 
   // const routing = useRoutes(routes);
