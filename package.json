@@ -4,8 +4,8 @@
   "private": true,
   "homepage": "/case-inbox",
   "scripts": {
-    "start": "PUBLIC_URL=/model/case-inbox craco start --no-cache",
-    "build": "PUBLIC_URL=/model/case-inbox craco build",
+    "start": "PUBLIC_URL=/case-inbox craco start --no-cache",
+    "build": "PUBLIC_URL=/case-inbox craco build",
     "test": "craco test  --env=jsdom --coverage --collectCoverageFrom=src/**/*js --collectCoverageFrom=!src/components/sxp-chat2/**/*js --collectCoverageFrom=!src/components/sxp-chat2/**/*.test.js",
     "eject": "craco eject"
   },

@@ -16,9 +16,6 @@ const defaultHistory = createBrowserHistory();
 const App = (props) => {
   const envConfig = props.config;
   const history = props.history ? props.history : defaultHistory;
-
-  // const routing = useRoutes(routes);
-  // const navigate = useNavigate();
   const [configuration, setConfiguration] = useState(null);
 
   useEffect(() => {
@@ -39,7 +36,6 @@ const App = (props) => {
   return (
     <ContextProvider config={envConfig}>
       <GlobalStyles />
-      {/* <KeycloakProvider keycloak={keycloak} initConfig={{ onLoad: 'login-required' }} onEvent={(event) => handleEvent(event)}> */}
       <Provider store={store}>
         <BrowserRouter>
           <AppConfig.Provider value={envConfig}>
@@ -47,10 +43,8 @@ const App = (props) => {
           </AppConfig.Provider>
         </BrowserRouter>
       </Provider>
-      {/* </KeycloakProvider> */}
     </ContextProvider>
   );
-
 };
 
 export default App;
