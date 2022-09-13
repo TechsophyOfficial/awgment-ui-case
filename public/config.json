@@ -10,7 +10,7 @@
     "socketPath": "/socket.io/",
     "chatFileServerUrl": "https://fileserver.techsophy.com/",
     "sxpProjectId": "6233029bfd9468494f68af33",
-    "mfeContainerBasename": "/caseInbox",
+    "mfeContainerBasename": "/model/caseInbox",
     "workflowEngineURL": "https://techsophy-platform.techsophy.com/camunda",
     "appServerURL": "https://techsophy-platform.techsophy.com/camunda/engine-rest",
     "customApiServerUrl": "http://139.59.80.134:8082/process-integration/service/1.0.0",
