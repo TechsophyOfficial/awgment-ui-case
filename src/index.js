@@ -7,7 +7,7 @@ import KeycloakWrapper from './KeycloakWrapper';
 
 
 window.renderCaseInboxMFE = (containerId, history) => {
-  fetch('../model/case-inbox/config.json')
+  fetch('../case-inbox/config.json')
     .then(async (r) => (r.json()))
     .then((config) => {
       ReactDOM.render(<App config={config} history={history} />, document.getElementById(containerId))
