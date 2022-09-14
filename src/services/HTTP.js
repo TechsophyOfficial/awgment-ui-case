@@ -1,16 +1,8 @@
 import { commonExceptionMessage, unAuthenticateUserExceptionMessage } from 'src/config/translations/en';
-import { useNavigate } from 'react-router-dom';
 // import ROUTES from 'config/routes';
 // import Cookies from 'helpers/Cookies';
 import defaultAPIClient from './client';
 // import { ACCESS_TOKEN, BASE_URL } from 'constants/common';
-
-const headerss = {
-  headers: {
-    'Content-Type': 'application/json',
-    "Authorization": "Bearer "
-  }
-}
 
 // const navigate = useNavigate();
 

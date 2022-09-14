@@ -1,8 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
-import StyleIcon from '@material-ui/icons/Style';
 import './style.css';
-import { Grid, Icon, MenuItem, Menu } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 
@@ -13,11 +12,9 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Moment from 'react-moment';
 import Loader from './loader';
-import { TXN_STATE_VARIABLE } from '../../variables/chatWidget'
 import { getQuoteSummary } from 'src/services/camundaService';
 
 
@@ -53,12 +50,10 @@ const useStyles = makeStyles({
 
 export default function QuoteSummary({ selectedTask }) {
     const classes = useStyles();
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
-    const [configJson, setConfigJson] = React.useState(JSON.parse(sessionStorage.getItem('config')));
-    const [openCommentBox, setOpenCommentBox] = React.useState(null);
+    const page = 0;
+    const rowsPerPage = 10;
+    const configJson = JSON.parse(sessionStorage.getItem('config'));
     const [commentList, setCommentList] = React.useState([]);
-    const inputRef = useRef(null);
     const [loading, setLoading] = React.useState(false);
 
     useEffect(() => {
@@ -85,12 +80,12 @@ export default function QuoteSummary({ selectedTask }) {
                             summary.createdBy,
                             <Moment format="YYYY/MMM/DD">{summary.createdOn}</Moment>,
                             <Moment format="YYYY/MMM/DD">{summary.quoteExpiry}</Moment>,
-                            getStatus(summary.status) ,
+                            getStatus(summary.status),
                             summary.buyerName,
                             summary.sellerName,
                             summary.amt,
                             summary.conditions,
-                            ))
+                        ))
                     });
                     setCommentList(rows);
                 } else {
@@ -103,7 +98,7 @@ export default function QuoteSummary({ selectedTask }) {
             }
         })
 
-    
+
 
         // getCommentsList(selectedTask.id).then(response => {
         //     if (response.success) {
@@ -126,14 +121,14 @@ export default function QuoteSummary({ selectedTask }) {
     }
 
     function getStatus(status) {
-        switch(status) {
-            case 'Approved' :   return <span className="status-approved">{status}</span> 
-            break;
+        switch (status) {
+            case 'Approved': return <span className="status-approved">{status}</span>
+                break;
 
-            case 'Negotiation' :   return <span className="status-negotiate">{status}</span> 
-            break;
+            case 'Negotiation': return <span className="status-negotiate">{status}</span>
+                break;
 
-            default :  return <span>{status}</span> 
+            default: return <span>{status}</span>
         }
     }
     // const handleChangePage = (event, newPage) => {

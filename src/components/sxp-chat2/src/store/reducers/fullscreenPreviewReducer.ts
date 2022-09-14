@@ -1,5 +1,5 @@
 import { createReducer } from '../../utils/createReducer';
-import { FullscreenPreviewState, ImageState } from '../types';
+import { FullscreenPreviewState } from '../types';
 
 import {
   OPEN_FULLSCREEN_PREVIEW,

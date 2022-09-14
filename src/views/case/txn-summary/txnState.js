@@ -1,42 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import MouseRoundedIcon from '@material-ui/icons/MouseRounded';
-import EventNoteIcon from '@material-ui/icons/EventNote';
-import DriveEtaIcon from '@material-ui/icons/DriveEta';
-import StyleIcon from '@material-ui/icons/Style';
 import './style.css';
-
 import theme from '../../../theme';
-import { Grid, Icon } from '@material-ui/core';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-
-// stepper
-
-
+import { Icon } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Check from '@material-ui/icons/Check';
-import SettingsIcon from '@material-ui/icons/Settings';
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
-import VideoLabelIcon from '@material-ui/icons/VideoLabel';
 import StepConnector from '@material-ui/core/StepConnector';
 import Button from '@material-ui/core/Button';
 import { TXN_STATE_VARIABLE } from 'src/variables/chatWidget';
@@ -134,11 +111,8 @@ const useStyless = makeStyles((theme) => ({
 
 const TxnState = ({ selectedTask, config, isEdit, openStatus, onFilterSaved }) => {
     const classes = useStyless()
-    const [expanded, setExpanded] = React.useState(false);
-    const [task, setTask] = useState(selectedTask);
     const [activeStep, setActiveStep] = React.useState(1);
     const steps = getSteps(config);
-    // const classes = useStyles();
 
     useEffect(() => {
         getActiveStage()
@@ -158,58 +132,6 @@ const TxnState = ({ selectedTask, config, isEdit, openStatus, onFilterSaved }) =
             });
         }
 
-    }
-
-    const handleNext = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    };
-
-    const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
-
-    const handleReset = () => {
-        setActiveStep(0);
-    };
-
-    useEffect(() => {
-        setTask(selectedTask);
-        // getVariables()
-    }, [selectedTask])
-
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
-    };
-
-    const getVariables = () => {
-        let variables = [];
-        // const taskVariables = config.variables;
-        //     taskVariables.forEach(variable => {
-        //     Object.keys(selectedTask.variables).forEach(function (key) {
-        //       if (variable.name == key) {
-        //         variables.push({ name: key, title: variable.title, value: selectedTask.variables[key].value });
-        //       }
-        //     });
-        //   })
-
-        return (
-            <Grid container ml={2}>
-                {variables.map((variable) =>
-                    <>
-                        <Grid item lg={6} md={6} xs={12}>
-                            <Typography color="textPrimary" gutterBottom variant="h6" >
-                                {variable.title}
-                            </Typography>
-                        </Grid>
-                        <Grid item lg={6} md={6} xs={12}>
-                            <Typography color="textSecondary" variant="body2" >
-                                {variable.value}
-                            </Typography>
-                        </Grid>
-                    </>
-                )}
-            </Grid>
-        )
     }
 
     return (
@@ -281,30 +203,6 @@ const TxnState = ({ selectedTask, config, isEdit, openStatus, onFilterSaved }) =
 }
 
 export default TxnState;
-
-
-const QontoConnector = withStyles({
-    alternativeLabel: {
-        top: 10,
-        left: 'calc(-50% + 8px)',
-        right: 'calc(50% + 8px)',
-    },
-    active: {
-        '& $line': {
-            borderColor: '#784af4',
-        },
-    },
-    completed: {
-        '& $line': {
-            borderColor: '#784af4',
-        },
-    },
-    line: {
-        borderColor: '#eaeaf0',
-        borderTopWidth: 3,
-        borderRadius: 1,
-    },
-})(StepConnector);
 
 const useQontoStepIconStyles = makeStyles({
     root: {
@@ -449,17 +347,4 @@ function getSteps(config) {
         finalSteps.push(step);
     })
     return finalSteps;
-}
-
-function getStepContent(step) {
-    switch (step) {
-        case 0:
-            return 'Select campaign settings...';
-        case 1:
-            return 'What is an ad group anyways?';
-        case 2:
-            return 'This is the bit I really care about!';
-        default:
-            return 'Unknown step';
-    }
 }

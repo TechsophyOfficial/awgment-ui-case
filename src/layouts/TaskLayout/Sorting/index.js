@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import {
-    Box,
-    Grid,
     Icon, MenuItem, Menu,
     Button,
-    Typography,
     Divider,
     TextField,
     Tooltip

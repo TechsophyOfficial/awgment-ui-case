@@ -1,32 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import MouseRoundedIcon from '@material-ui/icons/MouseRounded';
-import EventNoteIcon from '@material-ui/icons/EventNote';
-import DriveEtaIcon from '@material-ui/icons/DriveEta';
-import StyleIcon from '@material-ui/icons/Style';
 import './style.css';
-
-import { Grid } from '@material-ui/core';
-import TxnDetails from './txnDetails';
-import TxnState from './txnState';
 import components from 'src/task-froms/components';
-
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -78,11 +54,7 @@ const useStyles = makeStyles((theme) => ({
 const TransactionSummary = ({ selectedTask, dialogData, isEdit, openStatus, onFilterSaved }) => {
     const classes = useStyles()
     const [expanded, setExpanded] = React.useState(false);
-    const [task, setTask] = useState(selectedTask);
     const config = JSON.parse(sessionStorage.getItem('config'));
-    useEffect(() => {
-        setTask(selectedTask)
-    }, [selectedTask])
 
     const handleExpandClick = () => {
         setExpanded(!expanded);

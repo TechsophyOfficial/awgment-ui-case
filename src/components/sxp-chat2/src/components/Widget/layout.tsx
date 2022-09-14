@@ -7,7 +7,6 @@ import { AnyFunction } from '../../../src/utils/types';
 import { openFullscreenPreview } from '../../store/actions';
 
 import Conversation from './components/Conversation';
-import Launcher from './components/Launcher';
 import FullScreenPreview from './components/FullScreenPreview';
 
 import './style.scss';

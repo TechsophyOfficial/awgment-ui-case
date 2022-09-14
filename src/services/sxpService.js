@@ -2,8 +2,6 @@ import invokeApiCall from '../helpers/apiHelper';
 import { POST } from '../constants/requestTypes';
 import { GET } from 'src/constants/requestTypes';
 import { CASE_EVENT, CONVERSATION_HISTORY } from 'src/constants/endpoints';
-import { displayErrorToast } from 'src/helpers/toast';
-
 
 export function triggerJourney(url, data) {
     return invokeApiCall({

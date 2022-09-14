@@ -1,29 +1,13 @@
 import React, { Component } from 'react';
 import {
   TextField,
-  makeStyles,
   IconButton
 } from '@material-ui/core';
 import { Search as SearchIcon } from 'react-feather';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 // import config from '../auth/config.js'
 import './style.css'
-import InputAdornment from '@material-ui/core/InputAdornment';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import { getConfig } from 'src/services/common';
-
-const useStyles = makeStyles((theme) => ({
-  root: {},
-  importButton: {
-    marginRight: theme.spacing(1)
-  },
-  exportButton: {
-    marginRight: theme.spacing(1)
-  },
-  searchbox: {
-    width: '50',
-  },
-}));
 
 class Search extends Component {
 
@@ -128,7 +112,6 @@ getTextFeild(params) {
   )
 }
   render() {
-    const classes = useStyles;
     return (
       <div className={this.props.className}>
         <Autocomplete

@@ -11,8 +11,6 @@ import {
   ASSIGNEE,
   CANDIDATE,
   STATE_COMPLETED,
-  ASCENDING,
-  DESCENDING,
 } from "src/variables/taskVariables";
 import {
   getTasksCount,

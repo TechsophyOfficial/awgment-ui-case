@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import {
-  Box,
   Card,
   Typography,
   makeStyles,
@@ -37,12 +36,11 @@ const TaskList = ({ className, tasklist, onTaskClicked, refresh, loadMore, count
   const taskListRef = useRef();
   const [selectedTask, setSelectedTask] = useState({ id: '' })
   const theme = useTheme();
-  const [tasklistHt, setTasklistHt] = useState(0);
   const [reset , setReset] = useState(false)
 
   useEffect(() => {
     // window.scrollTo(0, 0);v
-    if ((tasklist.length > 0) && (selectedTask.id == '')) {
+    if ((tasklist.length > 0) && (selectedTask.id === '')) {
       setSelectedTask(tasklist[0]);
     }
     if(reset && tasklist.length>0) {  
@@ -92,7 +90,7 @@ const TaskList = ({ className, tasklist, onTaskClicked, refresh, loadMore, count
       const caseVariables = config.enabled_case_variables[caseDefinitionKey].variables;
       caseVariables.forEach(variable => {
         Object.keys(variablesObject).forEach(function (key) {
-          if (variable.name == key) {
+          if (variable.name === key) {
             variables.push({ name: key, title: variable.title, value: variablesObject[key].value });
           }
         });
@@ -224,7 +222,6 @@ const TaskList = ({ className, tasklist, onTaskClicked, refresh, loadMore, count
 
     } else {
       const windowHeight = window.innerHeight;
-      const windowHeight3 = document.getElementById('top-setting')?.clientHeight;
       return (windowHeight - 10);
     }
     return 30;

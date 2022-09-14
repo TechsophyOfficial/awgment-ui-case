@@ -3,8 +3,6 @@ import shadows from './shadows';
 import typography from './typography';
 
 const primary = '#2c98f0';
-const txtPrimary = '#fff';
-const secondary = '#000'
 
 const theme = createTheme({
   overrides: {

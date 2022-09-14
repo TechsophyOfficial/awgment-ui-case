@@ -1,22 +1,11 @@
-import React, { useState, useEffect, Component } from "react";
-import {
-  Box,
-  Container,
-  makeStyles,
-  Grid,
-  Typography,
-  Button,
-} from "@material-ui/core";
+import React, { Component } from "react";
+import { Grid } from "@material-ui/core";
 import "./style.css";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import { withStyles } from "@material-ui/styles";
 import Paper from "@material-ui/core/Paper";
 import {
   saveTaskForm,
-  claimTask,
   completeTask,
-  getTask,
   getTaskForm,
   getFormVariables,
 } from "src/services/camundaService";
@@ -76,7 +65,7 @@ class FormLayout extends Component {
   setFormVariables(data) {
     let result = {};
     if (data) {
-      Object.keys(data).map(function(key) {
+      Object.keys(data).map(function (key) {
         result[key] = data[key].value;
       });
     }
@@ -158,7 +147,6 @@ class FormLayout extends Component {
   };
 
   render() {
-    const classes = useStyles;
     return (
       <div>
         <Grid container>

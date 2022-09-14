@@ -10,7 +10,7 @@ const Components = {
 };
 
 export default block => {
-  if (typeof Components[block.component] !== "undefined" && block.type == 'txn') {
+  if (typeof Components[block.component] !== "undefined" && block.type === 'txn') {
     return React.createElement(Components[block.component], {
       selectedTask: block.selectedTask ,
       config : block.config

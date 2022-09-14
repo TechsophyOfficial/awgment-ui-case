@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
-import { Router, Route, Redirect, BrowserRouter, useRoutes } from 'react-router-dom';
-import { createBrowserHistory } from "history";
+import React from 'react';
+import { useRoutes } from 'react-router-dom';
 import MyTasksListView from './views/customer/MyTasksListView';
 import Basename from './Basename';
 import { Navigate } from 'react-router-dom';
@@ -14,18 +13,6 @@ import NotFoundView from './views/errors/NotFoundView';
 import { GetId } from "./views/filter-tasks/FilterListView/GetId.js";
 import AllTasksView from './views/allTaks/AllTasksListView';
 import { ALL_TASKS } from './constants/routes';
-
-
-
-
-const defaultHistory = createBrowserHistory();
-// const {
-//     REACT_APP_HOST: commonHost,
-//     REACT_APP_ACCOUNTS_HOST: accountsHost,
-//     REACT_APP_CASE_INBOX_HOST : caseInboxHost
-//   } = process.env;
-
-
 
 const Navigator = ({ history, config }) => {
     const routes = [
@@ -56,15 +43,11 @@ const Navigator = ({ history, config }) => {
 
     const routing = useRoutes(routes, Basename(history.location.pathname, config));
 
-    // if (initialized && keycloak.authenticated && token ) {
-        
-        return (
-            <>
+    return (
+        <>
             {routing}
-            </>
-        );
-    // }
-    return <div>Loading ... </div>;
+        </>
+    );
 };
 
 export default Navigator;

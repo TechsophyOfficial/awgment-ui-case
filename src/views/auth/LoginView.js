@@ -1,13 +1,11 @@
 import React, { useContext } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import {
   Box,
   Button,
   Container,
-  Grid,
-  Link,
   TextField,
   Typography,
   makeStyles
@@ -31,15 +29,15 @@ const LoginView = () => {
   const navigate = useNavigate();
   const appData = useContext(AppConfig);
 
- function onSubmit() {
-  const BASE_URL = `${appData.customApiServerUrl}`
-   getConfig(BASE_URL).then(response => {
-     if(response.success){
-      const configData = JSON.parse(response.data);
-      sessionStorage.setItem('config' , JSON.stringify(configData));
-      navigate('/app/my-tasks', { replace: true });  
-     }
-   })
+  function onSubmit() {
+    const BASE_URL = `${appData.customApiServerUrl}`
+    getConfig(BASE_URL).then(response => {
+      if (response.success) {
+        const configData = JSON.parse(response.data);
+        sessionStorage.setItem('config', JSON.stringify(configData));
+        navigate('/app/my-tasks', { replace: true });
+      }
+    })
   }
 
   return (
@@ -83,7 +81,7 @@ const LoginView = () => {
                     Sign in
                   </Typography>
                 </Box>
-              
+
                 <Box
                   mt={3}
                   mb={1}

@@ -1,50 +1,16 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import {
-    Avatar,
-    Box,
-    Button,
-    Hidden,
-    Typography,
-    IconButton,
-    makeStyles,
-    InputLabel
-} from '@material-ui/core';
-import {
-    AlertCircle as AlertCircleIcon,
-    BarChart as BarChartIcon,
-    Lock as LockIcon,
-    ShoppingBag as ShoppingBagIcon,
-    User as UserIcon,
-    UserPlus as UserPlusIcon,
-    Users as UsersIcon,
-    User,
-    List as ListIcon
-} from 'react-feather';
+import { useLocation } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core';
 import NavItem from './NavBar/NavItem';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CreateFilterDailog from './CreateFilterDailog';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import FilterListIcon from '@material-ui/icons/FilterList';
 // for left drawer
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-
 import PersonIcon from '@material-ui/icons/Person';
 import PeopleIcon from '@material-ui/icons/People';
-import AddAlertIcon from '@material-ui/icons/AddAlert';
-import SettingsIcon from '@material-ui/icons/Settings';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
-import SecurityIcon from '@material-ui/icons/Security';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import { useSelector, useDispatch } from 'react-redux';
 import { refreshFilters } from 'src/redux/actions';
@@ -148,7 +114,6 @@ const NavDropdown = () => {
     const [open, setOpen] = useState(false);
     const [edit, setEdit] = useState(null);
     const [items, setItem] = useState(itemss);
-    const [selectedFilter, setSelectedFilter] = React.useState('');
     const filter = useSelector((state) => ({
         refresh: state.filter?.refresh
     }));
@@ -176,10 +141,6 @@ const NavDropdown = () => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [location.pathname]);
-
-    const handleChange = (event) => {
-        setSelectedFilter(event.target.value);
-    };
 
     function getFilters() {
         const BASE_URL = `${appData.appServerURL}`;
@@ -211,50 +172,8 @@ const NavDropdown = () => {
                 dispatch(refreshFilters(false))
             }
         })
-        // fetch(`${process.env.REACT_APP_SERVER_URL}/filter?owner=` + localStorage.getItem('currentUser'), {
-        //     "method": "GET",
-        //     "headers": {
-        //         "Authorization": "Bearer " + localStorage.getItem('react-token')
-        //     }
-        // })
-        //     .then(presponse => presponse.json())
-        //     .then(response => {
-        //         let itemsArr = [...itemss]
-        //         response.map(element => {
-        //             const obj = {
-        //                 id: element.id,
-        //                 href: '/app/filter/' + element.id,
-        //                 icon: FilterListIcon,
-        //                 title: element.name,
-        //                 edit: true
-        //             }
-        //             itemsArr.push(obj);
-
-        //             // if (!handleCheck(obj)) {
-        //             //     itemsArr.push(obj);
-        //             // } else {
-        //             //     if (edit) {
-        //             //         let idx = handleEdit(obj, itemsArr);
-        //             //         if (idx) {
-        //             //             itemsArr[idx].title = obj.title;
-        //             //         }
-        //             //     }
-        //             // }
-        //         });
-        //         setItem(itemsArr);
-        //         dispatch(refreshFilters(false))
-        //     })
-        //     .catch(err => {
-        //         console.log(err);
-        //     });
     }
 
-    const handleCheck = (val) => {
-        return items.some(item => val.id === item.id);
-    }
-    const handleEdit = (obj, itemarr) => {
-        return itemarr.findIndex(item => item.id == obj.id)
-    }
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -271,14 +190,14 @@ const NavDropdown = () => {
 
     const onFilterSaved = (value) => {
         let itemsArr = [...items];
-        if (value && value == 'close' && edit) {
+        if (value && value === 'close' && edit) {
             setEdit(null)
         }
-        else if (edit && value == 'delete') {
-            itemsArr = itemsArr.filter(x => x.id != edit);
+        else if (edit && value === 'delete') {
+            itemsArr = itemsArr.filter(x => x.id !== edit);
             setEdit(null);
             setItem(itemsArr);
-        } else if (edit && value == 'update') {
+        } else if (edit && value === 'update') {
             // setEdit(null);
             // setItem(itemsArr);
             getFilters();

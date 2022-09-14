@@ -6,7 +6,6 @@ import {
 } from '@material-ui/core';
 import Page from '../../../components/Page';
 import Profile from './Profile';
-import ProfileDetails from './ProfileDetails';
 import {
   // rest of the elements/components imported remain same
   useParams

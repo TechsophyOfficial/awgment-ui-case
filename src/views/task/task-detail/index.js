@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-    makeStyles,
     Typography,
     Button
 } from '@material-ui/core';
@@ -193,7 +192,6 @@ export default class TaskDetail extends Component {
         }
     }
     render() {
-        const taskFormId = this.props.taskId;
         return (
             <div className="task-form-wrapper">
                 {this.renderCaseDetails()}

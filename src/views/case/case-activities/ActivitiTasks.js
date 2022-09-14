@@ -1,10 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {
     makeStyles,
@@ -22,12 +19,9 @@ import {
     List,
     ListItem,
     ListItemText,
-    ListItemSecondaryAction,
-    IconButton
 } from '@material-ui/core';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import PersonIcon from '@material-ui/icons/Person';
-import DeleteIcon from '@material-ui/icons/Delete';
 import WebAssetIcon from '@material-ui/icons/WebAsset';
 import theme from '../../../theme';
 import CheckIcon from '@material-ui/icons/Check';
@@ -78,7 +72,7 @@ const Tasks = ({ list, status, onGetTask, refreshTasks, appData }) => {
         }
     }
 
-    if (status == 'active') {
+    if (status === 'active') {
         return (
             <List component="nav" aria-label="main mailbox folders"> {
                 list && list.map((task) =>
@@ -93,7 +87,7 @@ const Tasks = ({ list, status, onGetTask, refreshTasks, appData }) => {
                 )
             }</List>
         )
-    } else if (status == 'available') {
+    } else if (status === 'available') {
         return (
             <List component="nav" aria-label="main mailbox folders"> {
                list && list.map((task) =>

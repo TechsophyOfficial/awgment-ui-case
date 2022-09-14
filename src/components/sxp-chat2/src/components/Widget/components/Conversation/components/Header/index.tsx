@@ -2,10 +2,6 @@ import React from 'react';
 import './style.scss';
 import personIcon from '../../../../../../../assets/person.png';
 
-
-const close = require('../../../../../../../assets/clear-button.svg') as string;
-
-
 type Props = {
   title: string;
   subtitle: string;

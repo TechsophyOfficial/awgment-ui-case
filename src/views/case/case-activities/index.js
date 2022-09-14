@@ -1,30 +1,11 @@
-import React, { Component, useEffect } from 'react';
-import {
-    Box,
-    makeStyles,
-    Typography,
-    ListItemSecondaryAction,
-    IconButton,
-    Button,
-    Grid
-} from '@material-ui/core';
-
+import React, { Component } from 'react';
+import { Typography } from '@material-ui/core';
 import StyleIcon from '@material-ui/icons/Style';
 import FolderSharedIcon from '@material-ui/icons/FolderShared';
 import './style.css';
 import ActivitiTasksDialog from './ActivitiTasks';
 import { getCaseActivitiTasks } from 'src/services/camundaService';
 import AppConfig from 'src/appConfig';
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        backgroundColor: theme.palette.background.dark,
-        minHeight: '100%',
-        paddingBottom: theme.spacing(3),
-        paddingTop: theme.spacing(3)
-    }
-}));
-
 
 export default class CaseActivities extends Component {
     static contextType = AppConfig
@@ -52,8 +33,8 @@ export default class CaseActivities extends Component {
         if (this.state.caseInstanceId) {
             const BASE_URL = `${this.context.apiServerURL}`;
             getCaseActivitiTasks(this.state.caseInstanceId, BASE_URL).then(response => {
-                if(response.success) {
-                    this.setActivitiTasks(response.data , activitiType);
+                if (response.success) {
+                    this.setActivitiTasks(response.data, activitiType);
                 }
             })
         }
@@ -85,7 +66,7 @@ export default class CaseActivities extends Component {
             caseActivitiTasks: { activeTasks: activeTasks, enabledTasks: enabledTasks, completedTasks: completedTasks }
         });
 
-        if(status) {
+        if (status) {
             let data = {
                 list: [],
                 status: status,
@@ -109,7 +90,7 @@ export default class CaseActivities extends Component {
             }
 
             this.setState({
-                dialogData : data
+                dialogData: data
             })
         }
     }
@@ -237,7 +218,7 @@ export default class CaseActivities extends Component {
                         dialogData={this.state.dialogData}
                         openStatus={() => { this.setState({ openDialog: false }) }}
                         onTaskComplet={() => this.onTaskComplet()}
-                        refreshTasks = {(type) => this.refreshCaseActivities(type)}
+                        refreshTasks={(type) => this.refreshCaseActivities(type)}
                     />
                     {/* <Accordion>
                         <AccordionSummary

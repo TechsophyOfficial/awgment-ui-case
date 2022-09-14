@@ -13,7 +13,6 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
-import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Moment from "react-moment";
 import Loader from "./loader";
@@ -54,7 +53,6 @@ const useStyles = makeStyles({
   root: {
     width: "100%",
     backgroundColor: "transparent",
-    width: "90%",
     marginLeft: "5%",
     boxShadow: "none",
 
@@ -103,11 +101,8 @@ const useStyles = makeStyles({
 
 export default function Comments({ selectedTask, businessKey }) {
   const classes = useStyles();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [configJson, setConfigJson] = React.useState(
-    JSON.parse(sessionStorage.getItem("config"))
-  );
+  const page = 0;
+  const rowsPerPage = 10;
   const [openCommentBox, setOpenCommentBox] = React.useState(null);
   const [commentList, setCommentList] = React.useState([]);
   const inputRef = useRef(null);

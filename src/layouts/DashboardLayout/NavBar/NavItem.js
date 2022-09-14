@@ -8,7 +8,6 @@ import {
   makeStyles,
   Tooltip
 } from '@material-ui/core';
-import EditIcon from '@material-ui/icons/Edit';
 
 const useStyles = makeStyles((theme) => ({
   item: {
@@ -17,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: 0
   },
   button: {
-    color: theme.palette.primary.main,
     fontWeight: theme.typography.fontWeightMedium,
     justifyContent: 'center',
     letterSpacing: 0,
@@ -73,27 +71,9 @@ const NavItem = ({
 }) => {
   const classes = useStyles();
 
-  const editFilterClicked = (id) => {
-    onEditClick(id)
-  }
-
   const handleDailogClick = () => {
     onFilterClicked()
   }
-
-  const editFilter = (edit, id) => {
-    if (edit) {
-      return (
-        <Button onClick={() => editFilterClicked(id)}><EditIcon className={classes.editIcon} /></Button>
-      )
-    } else {
-      return (
-        <span></span>
-      )
-    }
-
-  }
-
 
   const link = () => {
     if (click) {

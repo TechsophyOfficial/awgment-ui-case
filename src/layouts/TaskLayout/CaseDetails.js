@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
-import PropTypes, { func } from "prop-types";
-import { Box, Card, makeStyles } from "@material-ui/core";
+import React, { useEffect, useContext } from "react";
+import PropTypes from "prop-types";
+import { Box, makeStyles } from "@material-ui/core";
 import CaseActivities from "../../views/case/case-activities";
 import { Grid } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
@@ -13,15 +13,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { Check } from "react-feather";
 import CloseIcon from "@material-ui/icons/Close";
-import RefreshIcon from "@material-ui/icons/Refresh";
-import TransactionSummary from "../../views/case/txn-summary";
 import MyChecklists from "./checklist";
-// tabs
-// import SwipeableViews from 'react-swipeable-views';
-import { useTheme } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Conversation from "./conversation";
 import Comments from "./comments.js";
 import Loader from "./loader";
 import {
@@ -31,7 +25,6 @@ import {
 } from "src/services/camundaService";
 import TOAST_MESSAGES from "src/variables/toastMessages";
 import { displayErrorToast, displaySuccessToast } from "src/helpers/toast";
-import QuoteSummary from "./quoteSummary";
 import FormLayout from "./FormLayout";
 import AppConfig from "src/appConfig";
 
@@ -95,7 +88,7 @@ function a11yProps(index) {
 
 const CaseDetails = ({ className, selectedTask, onTaskComplet, ...rest }) => {
   const classes = useStyles();
-  const [taskId, setTaskId] = useState(selectedTask);
+  // const [taskId, setTaskId] = useState(selectedTask);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [value, setValue] = React.useState(0);
   const [caseDetails, setCaseDetails] = React.useState(null);
@@ -239,12 +232,12 @@ const CaseDetails = ({ className, selectedTask, onTaskComplet, ...rest }) => {
     }
   };
 
-  useEffect(() => {
-    setTaskId(null);
-  }, [selectedTask]);
+  // useEffect(() => {
+  //   setTaskId(null);
+  // }, [selectedTask]);
 
   function onTaskClicked(task) {
-    setTaskId(task.taskId);
+    // setTaskId(task.taskId);
   }
 
   function refreshTaskList() {

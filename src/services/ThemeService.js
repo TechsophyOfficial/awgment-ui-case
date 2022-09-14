@@ -46,7 +46,6 @@ export function getPreferenceThemeId(apiEndPoint) {
       endPoint: apiEndPoint,
       apiParams: {},
       shouldShowSuccessMessage : false,
-      shouldShowSuccessMessage : false,
       requestType: GET,
       setAccessToken: false
     }).then(({ success, data: responseData, showInlineAlerts = false, errors } = {}) => {
@@ -67,7 +66,6 @@ export function getPreferenceThemeId(apiEndPoint) {
         return invokeApiCall({
             endPoint: apiEndPoint + '/' + themeId,
             apiParams: {},
-            shouldShowSuccessMessage : false,
             shouldShowSuccessMessage : false,
             requestType: GET,
             setAccessToken: false

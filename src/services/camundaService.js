@@ -10,14 +10,11 @@ import {
   TASK,
   CASE_EXECUTION,
   CASE_ACTIVITI_TASKS,
-  HISTORY_CASE_INSTANCE,
   RUNTIME_FORM,
   FORM_VARIABLES,
   SUBMIT_TASK,
-  WORKFLOW_COMMENTS,
 } from "src/constants/endpoints";
 import { quoteSummaryApiResponse } from "src/mocks/quoteSummary";
-import { HISTORY_API_TIME_INTERVAL } from "src/variables/chatWidget";
 
 // import { SET_MASTER_LIST } from 'constants/master';
 // import { SET_FORM_VALUES } from 'constants/bookAnAppointment';

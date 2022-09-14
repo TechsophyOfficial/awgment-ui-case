@@ -1,50 +1,32 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
-import PropTypes, { func, element } from 'prop-types';
 import {
-    Avatar,
-    Box,
     Button,
-    Divider,
-    Drawer,
-    Hidden,
-    List,
     Typography,
     IconButton,
     makeStyles,
     InputLabel,
     Grid
 } from '@material-ui/core';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { FormControl, Input } from '@material-ui/core';
+import { FormControl } from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import DeleteIcon from '@material-ui/icons/Delete';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import { filter } from 'lodash';
-import { generatePath } from 'react-router';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import CloseIcon from '@material-ui/icons/Close';
-import { FileText } from 'react-feather';
 import Loader from '../TaskLayout/loader';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import { useDispatch } from 'react-redux';
 import { refreshFilters } from 'src/redux/actions';
 import { getFilter, deleteFilter, updateFilter, createFilter } from 'src/services/camundaService';
 import AppConfig from 'src/appConfig';
-
 
 const useStyles = makeStyles((theme) => ({
     filterDialog: {
@@ -173,12 +155,10 @@ const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
         checkedC: false
     });
     const [rows, setRows] = useState([]);
-    const [permission, setPermissions] = useState([]);
     const [name, setName] = React.useState('');
     const [description, setDescription] = React.useState('');
     const [priority, setPriority] = React.useState('');
     const [age, setAge] = React.useState([]);
-    const [user, setUser] = React.useState([]);
     const [isSubmit, setIsSubmit] = React.useState(false);
     const [variables, setVariables] = React.useState([]);
     const [searchOptionsGroupBycategory, setSearchOptionsGroupBycategoryLabel] = React.useState([]);
@@ -208,7 +188,7 @@ const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
             getFilterDetails();
         }
         setOpen(isOpen);
-        if ((isEdit && !edit) || (isEdit && (isEdit != edit))) {
+        if ((isEdit && !edit) || (isEdit && (isEdit !== edit))) {
             setEdit(isEdit);
         }
 
@@ -283,7 +263,6 @@ const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
     }
 
     function handleChangeCriteria(e, idx) {
-        const { param, value } = e.target;
         const newRows = [...rows];
         newRows[idx].value = e.target.value;
         setRows(newRows);
@@ -349,7 +328,6 @@ const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
     };
 
     function handleChangeVariables(e, idx) {
-        const { variable, value } = e.target;
         const newRows = [...variables];
         newRows[idx].value = e.target.value
         setVariables(newRows);
@@ -573,41 +551,12 @@ const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
         return query;
     }
 
-    function isDisabled() {
-        // if(!);
-        return false;
-    }
-
-    function handleNameChange(event) {
-        setName(event.target.value);
-    }
-
     function handlePriorityChange(event) {
         setPriority(event.target.value);
     }
 
     function handleDescriptionChange(event) {
         setDescription(event.target.value);
-    }
-
-    function getCategoryOption(category, value, i) {
-        if (i == 0) {
-            return (
-                // <>
-                [<ListSubheader>{category}</ListSubheader>,
-                <MenuItem key={value.variable}>
-                    {value.title}
-                </MenuItem>]
-                // </>
-            )
-        } else {
-            return (
-                <MenuItem key={value.variable}>
-                    {value.title}
-                </MenuItem>
-            )
-        }
-
     }
 
     const dialogTitle = () => {
@@ -618,19 +567,6 @@ const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
         }
     }
 
-    const getOptionLabel = (option) => {
-        if (option.title) {
-            return option.title
-        } else {
-            let title = '';
-            searchOptions.map((op) => {
-                if (option == op.variable) {
-                    title = op.title;
-                }
-            });
-            return title;
-        }
-    }
     const createFilterForm = (
         <div>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title"

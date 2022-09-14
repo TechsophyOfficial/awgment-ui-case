@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Box, makeStyles, Grid, Button, Typography } from "@material-ui/core";
+import { Box, Grid, Typography } from "@material-ui/core";
 import Search from "../../filter/search";
-import { ChevronLeft, ChevronRight } from "react-feather";
 import "../../customer/MyTasksListView/style.css";
 import TaskList from "../../../layouts/TaskLayout/TaskList";
 import EditIcon from "@material-ui/icons/Edit";
@@ -9,11 +8,7 @@ import CreateFilterDailog from "../../../layouts/DashboardLayout/CreateFilterDai
 import CaseDetails from "../../../layouts/TaskLayout/CaseDetails";
 import Loader from "../../../layouts/TaskLayout/loader";
 import Sorting from "src/layouts/TaskLayout/Sorting";
-import {
-  TASKS_PER_PAGE,
-  ASCENDING,
-  DESCENDING,
-} from "src/variables/taskVariables";
+import { TASKS_PER_PAGE } from "src/variables/taskVariables";
 import {
   getFilterTasksCount,
   getCaseDefinition,

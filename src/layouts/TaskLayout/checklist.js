@@ -1,8 +1,7 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { makeStyles } from "@mui/styles";
 import DoneIcon from "@mui/icons-material/Done";
 import {
-  getChecklistInstances,
   getChecklistItemInstanceById,
   completeChecklistItemInstances,
 } from "../../services/checklistService";
@@ -63,7 +62,7 @@ const MyChecklists = ({ selectedTask }) => {
     const { checklistInstanceId } = selectedTask;
     if (checklistInstanceId) {
       const CHECKLIST_ITEM_INSTANCE_ENDPOINT = `${appData.apiGatewayUrl}${CHECKLIST_ITEM_INSTANCE}`;
-      const { success, message, data } = await getChecklistItemInstanceById(
+      const { success, data } = await getChecklistItemInstanceById(
         CHECKLIST_ITEM_INSTANCE_ENDPOINT,
         checklistInstanceId
       );
@@ -107,7 +106,7 @@ const MyChecklists = ({ selectedTask }) => {
 
   const onCompleteChecklistItemInstances = async () => {
     const CHECKLIST_ITEM_INSTANCE_ENDPOINT = `${appData.apiGatewayUrl}${CHECKLIST_ITEM_INSTANCE}`;
-    const { success, message = "" } = await completeChecklistItemInstances(CHECKLIST_ITEM_INSTANCE_ENDPOINT, {
+    const { success } = await completeChecklistItemInstances(CHECKLIST_ITEM_INSTANCE_ENDPOINT, {
       idList: selectedChecklistItems,
     });
     if (success) {

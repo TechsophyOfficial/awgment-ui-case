@@ -85,13 +85,13 @@ const BroadcastMessageDialog = ({ isOpen, dialogData, openStatus, onBroadcastSel
 
     useEffect(() => {
         getSellerList();
-        if (sellerList.length > 0 && broadCaseSellerList.length > 0 && checked.length == 0) {
+        if (sellerList.length > 0 && broadCaseSellerList.length > 0 && checked.length === 0) {
             getCheckedList()
         }
     }, []);
 
     useEffect(() => {
-        if (sellerList.length > 0 && broadCaseSellerList.length > 0 && checked.length == 0) {
+        if (sellerList.length > 0 && broadCaseSellerList.length > 0 && checked.length === 0) {
             getCheckedList()
         }
     });

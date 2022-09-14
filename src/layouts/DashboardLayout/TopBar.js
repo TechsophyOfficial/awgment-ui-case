@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
   AppBar,
-  Badge,
   Box,
-  Hidden,
-  IconButton,
   Toolbar,
   makeStyles
 } from '@material-ui/core';
@@ -49,7 +46,6 @@ const useStyles = makeStyles(() => ({
     paddingRight : '7px',
     alignItems : 'center',
     minWidth : 100,
-    display : 'flex',
     textAlign : 'center',
 
     '& span' : {
@@ -71,8 +67,6 @@ const TopBar = ({
   ...rest
 }) => {
   const classes = useStyles();
-  const [notifications] = useState([]);
-
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 

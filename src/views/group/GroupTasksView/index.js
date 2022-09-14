@@ -5,10 +5,6 @@ import { CANDIDATE } from 'src/variables/taskVariables';
 
 export default class GroupTasksView extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <TaskLayout assignment={CANDIDATE} title={'Group Tasks'}></TaskLayout>

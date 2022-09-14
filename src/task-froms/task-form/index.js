@@ -1,12 +1,5 @@
-import React, { useState, useEffect, Component } from 'react';
-import {
-    Box,
-    Container,
-    makeStyles,
-    Grid,
-    Typography,
-    Button
-} from '@material-ui/core';
+import React, { Component } from 'react';
+import { Button } from '@material-ui/core';
 import './style.css';
 import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -103,11 +96,11 @@ class TaskForm extends Component {
                 <div className="task-form-actions">
                     {this.state.taskDetails.formKey ? <Button onClick={() => this.saveForm(this.state.taskDetails.id)} color="seconday" >
                         Save
-                     </Button> : <span></span>}
+                    </Button> : <span></span>}
 
                     <Button onClick={() => this.completeSelectedTask(this.state.taskDetails.id)} color="primary" >
                         Complete
-                </Button>
+                    </Button>
                 </div>
             )
         } else if (this.state.taskDetails && !this.state.taskDetails.assignee) {
@@ -115,7 +108,7 @@ class TaskForm extends Component {
                 <div className="task-form-actions">
                     <Button onClick={() => this.claimSelectedTask(this.state.taskDetails.id)} color="primary" >
                         Claim
-                </Button>
+                    </Button>
                 </div>
             )
         } else {
@@ -230,7 +223,6 @@ class TaskForm extends Component {
         this.setState({ age: event.target.value });
     }
     render() {
-        const taskFormId = this.props.taskId;
         const classes = useStyles;
         return (
             <div className="task-form">
