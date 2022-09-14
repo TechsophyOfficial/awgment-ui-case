@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
-import NavItem from './NavBar/NavItem';
+import NavItem from './NavItem';
 import CreateFilterDailog from './CreateFilterDailog';
 import FilterListIcon from '@material-ui/icons/FilterList';
 // for left drawer
