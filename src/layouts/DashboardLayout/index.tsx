@@ -30,29 +30,29 @@ const useStyles = makeStyles((theme) => ({
     flex: '1 1 auto',
     height: '100%',
     overflowY: 'hidden',
-    overflowX : 'hidden'
+    overflowX: 'hidden'
   }
 }));
 
 const DashboardLayout = () => {
   const classes = useStyles();
-  const contentRef = useRef(null)
-  
+  const contentRef = useRef(null);
+
   function onFilterSaved() {
   }
 
   return (
-    <div className={classes.root}>
-    <ToastContainer />
-      {/* <TopBar onMobileNavOpen={() => setMobileNavOpen(true)} /> */}
+    <div className={ classes.root }>
+      <ToastContainer />
+      {/* <TopBar onMobileNavOpen={() => setMobileNavOpen(true)} /> */ }
       {/* <NavBar
         onMobileClose={() => setMobileNavOpen(false)}
         openMobile={isMobileNavOpen}
       /> */}
-      <div className={classes.wrapper}>
-        <div className={classes.contentContainer}>
-          <div className={classes.content} ref={contentRef}>
-            <Outlet onFilterSaved={onFilterSaved}/>
+      <div className={ classes.wrapper }>
+        <div className={ classes.contentContainer }>
+          <div className={ classes.content } ref={ contentRef }>
+            <Outlet onFilterSaved={ onFilterSaved } />
             <NavDropdown />
           </div>
         </div>

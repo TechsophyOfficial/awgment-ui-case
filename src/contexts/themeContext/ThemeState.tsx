@@ -1,20 +1,42 @@
 import React, { useReducer } from 'react';
-// import { INITIAL_THEME, UPDATE_THEME } from 'constants/actions';
+// import { INITIAL_THEME, UPDATE_THEME } from 'constants/actions'; from './theme-context';
 import ThemeContext from './theme-context';
 import themeReducer from './theme-reducer';
 import { colors,createTheme } from '@material-ui/core';
 
 export const UPDATE_THEME = 'UPDATE_THEME';
 
-function shadeColor(color, percent) {
+declare module '@material-ui/core/styles/createPalette' {
+  interface TypeBackground {
+    dark: string;
+  }
 
-  var R = parseInt(color.substring(1,3),16);
-  var G = parseInt(color.substring(3,5),16);
-  var B = parseInt(color.substring(5,7),16);
+  interface TypeText {
+    header: string;
+  }
 
-  R = parseInt(R * (100 + percent) / 100);
-  G = parseInt(G * (100 + percent) / 100);
-  B = parseInt(B * (100 + percent) / 100);
+  interface PaletteOptions {
+    icons: {};
+    tooltip: {};
+  }
+}
+
+// declare module '@mui/material/styles' {
+
+//   interface PaletteOptions {
+//     icons: any 
+//   }
+// }
+
+function shadeColor(color, percent: number) {
+
+  var R:number = parseInt(color.substring(1,3),16);
+  var G:number = parseInt(color.substring(3,5),16);
+  var B:number = parseInt(color.substring(5,7),16);
+
+  R = Math.floor(R * (100 + percent) / 100);
+  G = Math.floor(G * (100 + percent) / 100);
+  B = Math.floor(B * (100 + percent) / 100);
 
   R = (R<255)?R:255;  
   G = (G<255)?G:255;  
@@ -61,7 +83,7 @@ export const INITIAL_THEME = createTheme({
       },
       palette: {
         background: {
-          dark: '#F4F6F8',
+          dark: "#F4F6F8",
           default: colors.common.white,
           paper: colors.common.white
         },

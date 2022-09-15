@@ -1,22 +1,22 @@
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import GlobalStyles from 'src/components/GlobalStyles';
+import GlobalStyles from 'src/components/GlobalStyles'
 import config from './views/auth/config.js';
 import './App.css';
 import { Provider } from 'react-redux';
-import store from './redux/store.js';
+import store from './redux/store';
 import { createBrowserHistory } from 'history';
-import Navigator from './Navigator.js';
-import ContextProvider from './ContextProvider.js';
-import AppConfig from './appConfig.js';
+import Navigator from 'src/Navigator';
+import ContextProvider from './ContextProvider';
+import AppConfig from 'src/appConfig'
 
 const defaultHistory = createBrowserHistory();
 
-const App = (props) => {
+const App = (props): React.ReactElement => {
   const envConfig = props.config;
   const history = props.history ? props.history : defaultHistory;
-  const [configuration, setConfiguration] = useState(null);
+  const [configuration, setConfiguration]: any = useState(null);
 
   useEffect(() => {
     if (!configuration) {

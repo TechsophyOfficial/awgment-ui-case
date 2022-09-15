@@ -5,8 +5,9 @@ import * as serviceWorker from './serviceWorker';
 import './index.css'
 import KeycloakWrapper from './KeycloakWrapper';
 
+declare const window: any;
 
-window.renderCaseInboxMFE = (containerId, history) => {
+window.renderCaseInboxMFE = (containerId: string, history) => {
   fetch('../case-inbox/config.json')
     .then(async (r) => (r.json()))
     .then((config) => {
@@ -16,7 +17,7 @@ window.renderCaseInboxMFE = (containerId, history) => {
 };
 
 window.unmountCaseInboxMFE = (containerId) => {
-  ReactDOM.unmountComponentAtNode(document.getElementById(containerId));
+  ReactDOM.unmountComponentAtNode(document.getElementById(containerId) as HTMLElement);
 };
 
 if (!document.getElementById('CaseInboxMFE-container')) {

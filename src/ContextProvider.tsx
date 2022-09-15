@@ -10,9 +10,9 @@ import {
   getPreferenceThemeId,
   getSelectedTheme,
 } from "./services/ThemeService";
-import { PREFERENCE_ENDPOINT, THEME_ENDPOINT } from '../src/constants/endpoints'
+import { PREFERENCE_ENDPOINT, THEME_ENDPOINT } from './constants/endpoints'
 
-const ContextProvider = ({ children, config }) => {
+const ContextProvider = ({ children, config }): React.ReactElement => {
   const { theme, updateTheme } = useContext(ThemeContext);
 
 

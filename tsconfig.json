@@ -2,7 +2,6 @@
   "compilerOptions": {
     "strict": true,
     "baseUrl": ".",
-    "outDir": "./lib/",
     "sourceMap": true,
     "noImplicitAny": false,
     "esModuleInterop": true,
@@ -22,6 +21,7 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "noFallthroughCasesInSwitch": true,
     "noEmit": true
   },
   "include": [
@@ -29,6 +29,8 @@
   ],
   "exclude": [
     "node_modules",
-    "lib"
+    "babel.config.js",
+    "metro.config.js",
+    "gulpfile.js"
   ]
 }
