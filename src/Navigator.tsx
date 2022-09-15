@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
 import MyTasksListView from 'src/views/customer/MyTasksListView';
-import Basename from './Basename';
+import Basename from 'src/Basename';
 import { Navigate } from 'react-router-dom';
 import DashboardLayout from 'src/layouts/DashboardLayout';
 import MainLayout from './layouts/MainLayout';

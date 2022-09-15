@@ -27,13 +27,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+declare const sessionStorage: any;
+
 const TaskList = ({ className, tasklist, onTaskClicked, refresh, loadMore, count, ...rest }) => {
   const classes = useStyles();
-  const config = JSON.parse(sessionStorage.getItem('config'));
+  const config:any = JSON.parse(sessionStorage.getItem('config'));
   const [tasks, setTasks] = useState(tasklist)
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
-  const taskListRef = useRef();
+  const taskListRef:any = useRef();
   const [selectedTask, setSelectedTask] = useState({ id: '' })
   const theme = useTheme();
   const [reset , setReset] = useState(false)
@@ -82,7 +84,7 @@ const TaskList = ({ className, tasklist, onTaskClicked, refresh, loadMore, count
   
   // display task variable in collapsable manner
   function getTaskVariables(variablesObject, caseDefinitionKey) {
-    let variables = [];   
+    let variables:any = [];   
     if (config &&
       config.enabled_case_variables &&
       config.enabled_case_variables[caseDefinitionKey] &&
@@ -156,7 +158,9 @@ const TaskList = ({ className, tasklist, onTaskClicked, refresh, loadMore, count
 
   // list of tasks
   const items = tasklist.map((task, i) =>
-    <ListItem button mt={3} key={task.id} onClick={() => onItemClickHandler(task)}
+    <ListItem button  
+      key={task.id} 
+      onClick={() => onItemClickHandler(task)}
       className={`task-variable-list ${(task.id == selectedTask.id) || (refresh && i==0) ? "active" : ""}`}
       style={{ borderColor: theme.palette.primary.main }}>
       <ListItemText>
@@ -209,8 +213,8 @@ const TaskList = ({ className, tasklist, onTaskClicked, refresh, loadMore, count
     if (el.current) {
       const top = el.current.offsetTop;
       const windowHeight = window.innerHeight;
-      const windowHeight2 = document.getElementById('container')?.clientHeight;
-      const windowHeight3 = document.getElementById('top-setting')?.clientHeight;
+      const windowHeight2:any = document.getElementById('container')?.clientHeight;
+      const windowHeight3:any = document.getElementById('top-setting')?.clientHeight;
 
       if (windowHeight2 < windowHeight) {
         return (windowHeight - top);

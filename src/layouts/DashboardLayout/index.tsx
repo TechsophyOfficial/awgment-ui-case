@@ -38,9 +38,6 @@ const DashboardLayout = () => {
   const classes = useStyles();
   const contentRef = useRef(null);
 
-  function onFilterSaved() {
-  }
-
   return (
     <div className={ classes.root }>
       <ToastContainer />
@@ -52,7 +49,7 @@ const DashboardLayout = () => {
       <div className={ classes.wrapper }>
         <div className={ classes.contentContainer }>
           <div className={ classes.content } ref={ contentRef }>
-            <Outlet onFilterSaved={ onFilterSaved } />
+            <Outlet />
             <NavDropdown />
           </div>
         </div>
