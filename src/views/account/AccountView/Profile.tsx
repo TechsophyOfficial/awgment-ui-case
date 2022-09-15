@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {
   Avatar,
@@ -35,11 +35,17 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const items = groups.map((item) =>
+const items = groups.map((item:any) =>
 <li key={item}>{item.name}</li>
 );
 
-const Profile = ({ className, ...rest }) => {
+interface ProfileProps {
+  className?: string;
+  rest?: [];
+}
+
+
+const Profile: React.FC<ProfileProps>  = ({ className, ...rest }) => {
   const classes = useStyles();
 
   return (
@@ -94,8 +100,8 @@ const Profile = ({ className, ...rest }) => {
   );
 };
 
-Profile.propTypes = {
-  className: PropTypes.string
-};
+// Profile.propTypes = {
+//   className: PropTypes.string
+// };
 
 export default Profile;

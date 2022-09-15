@@ -2,7 +2,7 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import GlobalStyles from 'src/components/GlobalStyles'
-import config from './views/auth/config.js';
+import config from './views/auth/config';
 import './App.css';
 import { Provider } from 'react-redux';
 import store from './redux/store';

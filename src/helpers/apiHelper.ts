@@ -1,5 +1,5 @@
 import HTTP from '../services/HTTP';
-import { commonExceptionMessage } from 'src/config/translations/en';
+import { commonExceptionMessage } from 'src/config/translations/en.json';
 // import { setSpinner } from 'actions/common/common';
 // import { store } from 'App';
 import { GET } from 'src/constants/requestTypes';

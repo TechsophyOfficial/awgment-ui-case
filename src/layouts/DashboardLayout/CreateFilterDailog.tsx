@@ -27,6 +27,7 @@ import { useDispatch } from 'react-redux';
 import { refreshFilters } from 'src/redux/actions';
 import { getFilter, deleteFilter, updateFilter, createFilter } from 'src/services/camundaService';
 import AppConfig from 'src/appConfig';
+import { any } from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
     filterDialog: {
@@ -145,30 +146,37 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+declare const sessionStorage: any;
+declare module '@material-ui/core/Dialog' {
+    interface DialogProps {
+      className: any;
+    }
+}
+
 const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
-    const classes = useStyles();
+    const classes:any = useStyles();
     const [open, setOpen] = useState(false);
     const [edit, setEdit] = useState(null);
-    const [state, setState] = useState({
+    const [state, setState]:any = useState({
         checkedA: false,
         checkedB: false,
         checkedC: false
     });
-    const [rows, setRows] = useState([]);
+    const [rows, setRows]:any = useState([]);
     const [name, setName] = React.useState('');
     const [description, setDescription] = React.useState('');
     const [priority, setPriority] = React.useState('');
     const [age, setAge] = React.useState([]);
     const [isSubmit, setIsSubmit] = React.useState(false);
-    const [variables, setVariables] = React.useState([]);
+    const [variables, setVariables]:any = React.useState([]);
     const [searchOptionsGroupBycategory, setSearchOptionsGroupBycategoryLabel] = React.useState([]);
-    const configJson = JSON.parse(sessionStorage.getItem('config'));
+    const configJson:any = JSON.parse(sessionStorage.getItem('config'));
     const searchOptions = configJson?.search_parameters;
     const [loading, setLoading] = React.useState(false);
 
     const dispatch = useDispatch();
 
-    const appData = useContext(AppConfig)
+    const appData:any = useContext(AppConfig)
     const groupBy = (array, key) => {
         // Return the end result
         return array.reduce((result, currentValue) => {
@@ -222,7 +230,7 @@ const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
     //         const ageRow = [...age];
     //         ageRow[idx] = newValue.variable;
     //         setAge(ageRow);
-    //         const newRows = [...rows];
+    //         const newRows:any = [...rows];
     //         newRows[idx].key = newValue.variable;
     //         if (newValue.defaultValue) {
     //             newRows[idx].value = newValue.defaultValue;
@@ -232,7 +240,7 @@ const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
     //         const ageRow = [...age];
     //         ageRow[idx] = null;
     //         setAge(ageRow);
-    //         const newRows = [...rows];
+    //         const newRows:any = [...rows];
     //         newRows[idx].key = null
     //         setRows(newRows);
     //     }
@@ -243,27 +251,27 @@ const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
         console.log(event);
         let newValue = JSON.parse(event?.target.options[event.target.selectedIndex].dataset.object);
         if (newValue) {
-            const ageRow = [...age];
+            const ageRow:any = [...age];
             ageRow[idx] = newValue.variable;
             setAge(ageRow);
-            const newRows = [...rows];
+            const newRows:any = [...rows];
             newRows[idx].key = newValue.variable;
             if (newValue.defaultValue) {
                 newRows[idx].value = newValue.defaultValue;
             }
             setRows(newRows);
         } else {
-            const ageRow = [...age];
+            const ageRow:any = [...age];
             ageRow[idx] = null;
             setAge(ageRow);
-            const newRows = [...rows];
+            const newRows:any = [...rows];
             newRows[idx].key = null
             setRows(newRows);
         }
     }
 
     function handleChangeCriteria(e, idx) {
-        const newRows = [...rows];
+        const newRows:any = [...rows];
         newRows[idx].value = e.target.value;
         setRows(newRows);
     }
@@ -273,13 +281,13 @@ const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
             key: "",
             value: ""
         };
-        let newArr = [...rows];
+        let newArr:any = [...rows];
         newArr.push(item);
         setRows(newArr);
     }
 
     function handleRemoveSpecificRow(idx) {
-        const newRows = [...rows]
+        const newRows:any = [...rows]
         newRows.splice(idx, 1)
         setRows(newRows);
     }
@@ -289,14 +297,14 @@ const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
     //     const userRow = [...user];
     //     userRow[idx] = event.target.value;
     //     setUser(userRow);
-    //     const newRows = [...permission];
+    //     const newRows:any = [...permission];
     //     newRows[idx].user = event.target.value
     //     setPermissions(newRows);
     // };
 
     // function handleChangePermissions(e, idx) {
     //     const { user, value } = e.target;
-    //     const newRows = [...permission];
+    //     const newRows:any = [...permission];
     //     newRows[idx].value = e.target.value;
     //     setPermissions(newRows);
     // }
@@ -312,7 +320,7 @@ const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
     // }
 
     // function handleRemoveSpecificPermissionRow(idx) {
-    //     const newRows = [...permission]
+    //     const newRows:any = [...permission]
     //     newRows.splice(idx, 1)
     //     setPermissions(newRows);
     // }
@@ -322,13 +330,13 @@ const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
         // const variableRow = [...variable];
         // variableRow[idx] = event.target.value;
         // setVariable(variableRow);
-        const newRows = [...variables];
+        const newRows:any = [...variables];
         newRows[idx].variable = event.target.value
         setVariables(newRows);
     };
 
     function handleChangeVariables(e, idx) {
-        const newRows = [...variables];
+        const newRows:any = [...variables];
         newRows[idx].value = e.target.value
         setVariables(newRows);
     }
@@ -338,13 +346,13 @@ const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
             variable: "",
             value: ""
         };
-        let newArr = [...variables];
+        let newArr:any = [...variables];
         newArr.push(item);
         setVariables(newArr);
     }
 
     function handleRemoveSpecificVariableRow(idx) {
-        const newRows = [...variables]
+        const newRows:any = [...variables]
         newRows.splice(idx, 1)
         setVariables(newRows);
     }
@@ -437,8 +445,8 @@ const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
                     });
 
                     if (filter.query) {
-                        let rowArr = [];
-                        let ageArr = [...age];
+                        let rowArr:any = [];
+                        let ageArr:any = [...age];
                         const query = filter.query;
                         Object.keys(query).forEach(function (key) {
                             if (typeof (query[key]) == 'string') {
@@ -466,7 +474,7 @@ const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
 
                     // for variables
                     if (filter.properties.variables && filter.properties.variables.length > 0) {
-                        let variablesArr = [];
+                        let variablesArr:any = [];
                         let variablesObj = filter.properties.variables;
                         variablesObj.map(item => {
                             let obj = item ? { variable: item.name, value: item.label } : {};
@@ -513,9 +521,9 @@ const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
     }
 
     function getVariables() {
-        const query = [];
-        variables.map(element => {
-            let obj = {};
+        const query:any = [];
+        variables.map((element:any) => {
+            let obj:any = {};
             obj['name'] = element.variable;
             obj['label'] = element.value;
             query.push(obj);
@@ -543,8 +551,8 @@ const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
     }
 
     function getQuery() {
-        const query = {};
-        rows.map(param => {
+        const query:any = {};
+        rows.map((param:any) => {
             query[param.key] = param.value;
         });
 

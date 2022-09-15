@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 const LoginView = () => {
   const classes = useStyles();
   const navigate = useNavigate();
-  const appData = useContext(AppConfig);
+  const appData:any = useContext(AppConfig);
 
   function onSubmit() {
     const BASE_URL = `${appData.customApiServerUrl}`

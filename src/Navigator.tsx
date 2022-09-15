@@ -1,16 +1,16 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
-import MyTasksListView from './views/customer/MyTasksListView';
+import MyTasksListView from 'src/views/customer/MyTasksListView';
 import Basename from './Basename';
 import { Navigate } from 'react-router-dom';
 import DashboardLayout from 'src/layouts/DashboardLayout';
 import MainLayout from './layouts/MainLayout';
-import AccountView from './views/account/AccountView';
+import AccountView from 'src/views/account/AccountView';
 import GroupTasksView from './views/group/GroupTasksView';
 import CompletedTasksView from './views/completed/CompletedTasksView';
 import LoginView from './views/auth/LoginView';
 import NotFoundView from './views/errors/NotFoundView';
-import { GetId } from "./views/filter-tasks/FilterListView/GetId.js";
+import { GetId } from "./views/filter-tasks/FilterListView/GetId";
 import AllTasksView from './views/allTaks/AllTasksListView';
 import { ALL_TASKS } from './constants/routes';
 

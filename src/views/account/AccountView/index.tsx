@@ -4,8 +4,8 @@ import {
   Grid,
   makeStyles
 } from '@material-ui/core';
-import Page from '../../../components/Page';
-import Profile from './Profile';
+import Page from 'src/components/Page'
+import Profile from './Profile'
 import {
   // rest of the elements/components imported remain same
   useParams
