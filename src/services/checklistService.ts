@@ -14,7 +14,7 @@ import request from "./HTTP";
 
 export const getChecklistItemInstanceById = async (url, id) => {
   const r = await request.get(
-    `${url}?checklist-instance-id=${id}`
+    `${url}?checklist-instance-id=${id}`,
   );
   if (r.success) {
     const data = r.data;

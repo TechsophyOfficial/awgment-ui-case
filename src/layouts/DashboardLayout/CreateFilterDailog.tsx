@@ -435,19 +435,19 @@ const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
             const GATEWAY_URL = `${appData.apiGatewayUrl}`;
             getFilter(isEdit, GATEWAY_URL).then(response => {
                 if (response.success && response.data) {
-                    let filter = response.data;
-                    setName(filter.name);
-                    setDescription(filter.properties.description);
-                    setPriority(filter.properties.priority);
+                    let filter = response?.data;
+                    setName(filter?.name);
+                    setDescription(filter?.properties?.description);
+                    setPriority(filter?.properties?.priority);
                     setState({
-                        checkedA: filter.properties.refresh,
-                        checkedC: filter.properties.checkedC
+                        checkedA: filter?.properties?.refresh,
+                        checkedC: filter?.properties?.checkedC
                     });
 
-                    if (filter.query) {
+                    if (filter?.query) {
                         let rowArr:any = [];
                         let ageArr:any = [...age];
-                        const query = filter.query;
+                        const query = filter?.query;
                         Object.keys(query).forEach(function (key) {
                             if (typeof (query[key]) == 'string') {
                                 let obj = { key: key, value: query[key] }
@@ -473,9 +473,9 @@ const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
                     }
 
                     // for variables
-                    if (filter.properties.variables && filter.properties.variables.length > 0) {
+                    if (filter?.properties?.variables && filter?.properties?.variables.length > 0) {
                         let variablesArr:any = [];
-                        let variablesObj = filter.properties.variables;
+                        let variablesObj = filter?.properties?.variables;
                         variablesObj.map(item => {
                             let obj = item ? { variable: item.name, value: item.label } : {};
                             variablesArr.push(obj);

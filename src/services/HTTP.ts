@@ -1,4 +1,4 @@
-import { commonExceptionMessage, unAuthenticateUserExceptionMessage } from 'src/config/translations/en';
+import { commonExceptionMessage, unAuthenticateUserExceptionMessage } from 'src/config/translations/en.json';
 // import ROUTES from 'config/routes';
 // import Cookies from 'helpers/Cookies';
 import defaultAPIClient from './client';
@@ -50,8 +50,8 @@ function callApi(endpoint, method, body, { APIClient = defaultAPIClient } = {}) 
 
 
 export default {
-  get: (url, body, options) => callApi(url, 'get', { params: body }, options),
-  post: (url, body, options) => callApi(url, 'post', body, options),
-  put: (url, body, options) => callApi(url, 'put', body, options),
-  delete: (url, body, options) => callApi(url, 'delete', body, options)
+  get: (url:string, body?:any, options?:any) => callApi(url, 'get', { params: body }, options),
+  post: (url:string, body?:any, options?:any) => callApi(url, 'post', body, options),
+  put: (url:string, body?:any, options?:any) => callApi(url, 'put', body, options),
+  delete: (url:string, body?:any, options?:any) => callApi(url, 'delete', body, options)
 };

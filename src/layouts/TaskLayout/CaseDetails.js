@@ -16,7 +16,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import MyChecklists from "./checklist";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Comments from "./comments.js";
+import Comments from "./comments";
 import Loader from "./loader";
 import {
   getCaseInstance,

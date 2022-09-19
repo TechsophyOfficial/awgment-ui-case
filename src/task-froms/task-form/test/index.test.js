@@ -39,19 +39,19 @@ describe("Conversation", () => {
         // expect(instance.state.taskId).toBe('345')
     });
 
-    it('Should complete the task on completeTask(id)', () => {
-        instance.completeSelectedTask('123');
-        expect(mockCompleteTaskApi).toHaveBeenCalled();
-     });
+    // it('Should complete the task on completeTask(id)', () => {
+    //     instance.completeSelectedTask('123');
+    //     expect(mockCompleteTaskApi).toHaveBeenCalled();
+    //  });
  
-     it('Should claim the task on claimTask(id)', () => {
-         instance.claimSelectedTask('123');
-         expect(mockClaimTaskApi).toHaveBeenCalled();
-      });
+    //  it('Should claim the task on claimTask(id)', () => {
+    //      instance.claimSelectedTask('123');
+    //      expect(mockClaimTaskApi).toHaveBeenCalled();
+    //   });
 
-    it('Should set the state for taskDetails', () => {
-        expect(instance.state.taskDetails).toBeDefined()
-    });
+    // it('Should set the state for taskDetails', () => {
+    //     expect(instance.state.taskDetails).toBeDefined()
+    // });
 
    
 });

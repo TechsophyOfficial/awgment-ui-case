@@ -13,8 +13,8 @@ describe("Comments Component", () => {
         wrapper = mount(<Comments selectedTask={selectedTask} />);
         instance = wrapper.instance();
 
-        const mockGetComment = jest.spyOn(cammundaService, 'getCommentsList');
-        mockGetComment.mockResolvedValue(commentsApiResponse);
+        // const mockGetComment = jest.spyOn(cammundaService, 'getCommentsList');
+        // mockGetComment.mockResolvedValue(commentsApiResponse);
 
         const mockAddComment = jest.spyOn(cammundaService, 'createComment');
         mockAddComment.mockResolvedValue(createCommentApiResponse);

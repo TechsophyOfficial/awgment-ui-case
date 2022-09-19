@@ -39,50 +39,54 @@ import { GET } from 'src/constants/requestTypes';
 //     }
 //     return null;
 // };
+interface getResponseProps {
+  success: boolean;
+  data: any;
+  showInlineAlerts: boolean;
+  errors: any;
+}
 
-export function getPreferenceThemeId(apiEndPoint) {
+export function getPreferenceThemeId(apiEndPoint:any) {
+  return invokeApiCall({
+    endPoint: apiEndPoint,
+    apiParams: {},
+    shouldShowSuccessMessage: false,
+    requestType: GET,
+    setAccessToken: false,
+    options: {}
+  }).then((response) => {
+    const { success = false, data: responseData = {}, showInlineAlerts = false, errors = {} }:getResponseProps = response;
+    if (success) {
+      return { success, data: responseData.data.themeId };
+    }
+    return { success, errors, showInlineAlerts };
+  });
+
+}
+
+export function getSelectedTheme(themeId, apiEndPoint) {
+  // const themeId = await getPreferenceThemeId();
+
+  if (themeId) {
     return invokeApiCall({
-      // endPoint: PREFERENCE_API_ENDPOINT,
-      endPoint: apiEndPoint,
+      endPoint: apiEndPoint + '/' + themeId,
       apiParams: {},
-      shouldShowSuccessMessage : false,
+      shouldShowSuccessMessage: false,
       requestType: GET,
-      setAccessToken: false
-    }).then(({ success, data: responseData, showInlineAlerts = false, errors } = {}) => {
+      setAccessToken: false,
+      options:{}
+    }).then((response) => {
+      const { success = false, data: responseData = {}, showInlineAlerts = false, errors = {} }:getResponseProps = response;
       if (success) {
         return { success, data: responseData.data.themeId };
       }
-      if(!success) {
-            return { success, errors, showInlineAlerts };
-      }
-      
+      return { success, errors, showInlineAlerts };
     });
   }
+  return { success: false };
+}
 
-  export function getSelectedTheme(themeId, apiEndPoint) {
-    // const themeId = await getPreferenceThemeId();
 
-    if(themeId) {
-        return invokeApiCall({
-            endPoint: apiEndPoint + '/' + themeId,
-            apiParams: {},
-            shouldShowSuccessMessage : false,
-            requestType: GET,
-            setAccessToken: false
-          }).then(({ success, data: responseData, showInlineAlerts = false, errors } = {}) => {
-            if (success) {
-              return { success, data: responseData.content };
-            }
-            if(!success) {
-                  return { success, errors, showInlineAlerts };
-            }
-            
-          });
-        }
-        return { success: false };
-    }
-
-  
 
 
 // export const getSelectedTheme = async (): Promise<{ success: boolean; data?: ThemeProps }> => {
