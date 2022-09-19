@@ -123,7 +123,7 @@ const TxnState = ({ selectedTask, config, isEdit, openStatus, onFilterSaved }) =
             setActiveStep(0);
             Object.keys(selectedTask.variables).forEach(function (key) {
                 if (key == TXN_STATE_VARIABLE) {
-                    const index = steps.findIndex(stage => stage.id == selectedTask.variables[key]);
+                    const index = steps.findIndex((stage:any )=> stage.id == selectedTask.variables[key]);
                     setActiveStep(index);
                 }
                 // if (variable.name == key) {
@@ -138,6 +138,7 @@ const TxnState = ({ selectedTask, config, isEdit, openStatus, onFilterSaved }) =
         <Card className={classes.root}>
             <CardHeader className={classes.cardHeading}
                 avatar={
+                    // @ts-ignore
                     <Icon className={classes.avatar} color={theme.palette.background.white}>{config ? config.icon : 'star'}</Icon>
                 }
                 title={
@@ -158,7 +159,7 @@ const TxnState = ({ selectedTask, config, isEdit, openStatus, onFilterSaved }) =
                         </div> */}
                 <div className={classes.stepperRoot}>
                     <Stepper className={classes.stepper} alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
-                        {steps.map((label) => (
+                        {steps.map((label:any) => (
                             <Step key={label.name}>
                                 <StepLabel icon={<div className={'icon-wrap'} style={{ backgroundColor: label.color }}><Icon style={{ fontSize: '1rem' }}>{label.icon}</Icon></div>} StepIconComponent={ColorlibStepIcon}>{label.name}</StepLabel>
                                 {/* <StepLabel  icon={<Icon>star</Icon>}>{label}</StepLabel> */}
@@ -341,8 +342,8 @@ ColorlibStepIcon.propTypes = {
 };
 
 function getSteps(config) {
-    let steps = config? config.steps : [];
-    let finalSteps = [];
+    let steps:any = config? config.steps : [];
+    let finalSteps:any = [];
     steps.map((step) => {
         finalSteps.push(step);
     })

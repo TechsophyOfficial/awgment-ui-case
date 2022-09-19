@@ -5,10 +5,13 @@ import {
 } from '@material-ui/core';
 import './style.css';
 import Moment from 'react-moment';
-import Components from '../../../task-froms/components.js';
+import Components from '../../../task-froms/components';
 import { getTask, completeTask, claimTask } from 'src/services/camundaService';
 import AppConfig from 'src/appConfig';
-export default class TaskDetail extends Component {
+
+declare const sessionStorage: any;
+
+export default class TaskDetail extends Component <any, any> {
     static contextType = AppConfig
     constructor(props) {
         super(props);

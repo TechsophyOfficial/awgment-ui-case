@@ -7,7 +7,7 @@ import ActivitiTasksDialog from './ActivitiTasks';
 import { getCaseActivitiTasks } from 'src/services/camundaService';
 import AppConfig from 'src/appConfig';
 
-export default class CaseActivities extends Component {
+export default class CaseActivities extends Component <any, any> {
     static contextType = AppConfig
     constructor(props) {
         super(props);
@@ -40,10 +40,10 @@ export default class CaseActivities extends Component {
         }
     }
 
-    setActivitiTasks(activitiTasks, status) {
-        let activeTasks = [];
-        let enabledTasks = [];
-        let completedTasks = [];
+    setActivitiTasks(activitiTasks:any, status) {
+        let activeTasks:any = [];
+        let enabledTasks:any = [];
+        let completedTasks:any = [];
 
         if (activitiTasks && activitiTasks.length > 0) {
             activitiTasks.forEach(task => {

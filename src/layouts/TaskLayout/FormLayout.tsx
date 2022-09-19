@@ -26,8 +26,17 @@ const useStyles = (theme) => ({
   },
 });
 
-class FormLayout extends Component {
-  static contextType = AppConfig
+declare const sessionStorage: any;
+
+type Props = {
+  selectedTask: any;
+  taskId:any;
+  formKey:any;
+  onTaskComplete: () => void;
+};
+
+class FormLayout extends Component <Props, any> {
+  static contextType = AppConfig;
   constructor(props) {
     super(props);
     this.handleSubmit.bind(this);
@@ -37,7 +46,7 @@ class FormLayout extends Component {
       configJson: JSON.parse(sessionStorage.getItem("config")),
       formDetails: null,
       formVariables: null,
-      taskId: this.props.taskId,
+      taskId: props.taskId,
       isFormReadOnly: true,
     };
   }
@@ -150,7 +159,7 @@ class FormLayout extends Component {
     return (
       <div>
         <Grid container>
-          <Grid item lg={12} md={12} sm={12} className={""}>
+          <Grid item lg={ 12 } md={ 12 } sm={ 12 } className={ "" }>
             {/* <AppBar position="relative" color="transparent" variant="dense" className={'buyer-head'}>
                             <Toolbar>
                                 <Grid container spacing={0} >
@@ -163,27 +172,27 @@ class FormLayout extends Component {
                             </Toolbar>
                         </AppBar> */}
 
-            <div style={{ position: "relative" }}>
-              {this.loading && <Loader />}
-              <Paper className={"form-layout"} elevation0>
+            <div style={ { position: "relative" } }>
+              { this.state.loading && <Loader /> }
+              <Paper className={ "form-layout" } elevation={0}>
                 <TsfFormioForm
-                  form={this.state.formDetails}
-                  options={{
+                  form={ this.state.formDetails }
+                  options={ {
                     readOnly: this.props.selectedTask.assignee ? false : true,
-                  }}
+                  } }
                   submission={
                     this.state.formVariables && {
                       data: this.state.formVariables,
                     }
                   }
-                  onSubmit={(submission) => {
+                  onSubmit={ (submission) => {
                     this.handleSubmit(submission.data);
-                  }}
-                  onCustomEvent={({ success, data }) => {
+                  } }
+                  onCustomEvent={ ({ success, data }) => {
                     if (success) {
                       this.handleSubmit(data?.formData);
                     }
-                  }}
+                  } }
                 />
               </Paper>
             </div>

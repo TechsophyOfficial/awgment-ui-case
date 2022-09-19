@@ -28,9 +28,13 @@ const useStyles = makeStyles({
     }
 });
 
-export default function Loader({ position }) {
+interface LoaderProps {
+    position?: string;
+}
 
-    const classes = useStyles();
+export default function Loader({ position }:LoaderProps) {
+
+    const classes:any = useStyles();
     return (
         <div className={classes.root + ' ' +  `${position ? classes.customPosition : ''}`}>
             <CircularProgress className={classes.loader} />

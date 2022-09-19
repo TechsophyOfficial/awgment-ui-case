@@ -100,15 +100,15 @@ const useStyles = makeStyles({
 });
 
 export default function Comments({ selectedTask, businessKey }) {
-  const classes = useStyles();
+  const classes:any = useStyles();
   const page = 0;
   const rowsPerPage = 10;
   const [openCommentBox, setOpenCommentBox] = React.useState(null);
   const [commentList, setCommentList] = React.useState([]);
-  const inputRef = useRef(null);
+  const inputRef:any = useRef(null);
   const [loading, setLoading] = React.useState(false);
   // const [businessK , setBusinessKey] = React.useState(businessK)
-  const appData = React.useContext(AppConfig);
+  const appData:any = React.useContext(AppConfig);
 
   useEffect(() => {
     if (selectedTask) {
@@ -130,7 +130,7 @@ export default function Comments({ selectedTask, businessKey }) {
       getCommentsList(BASE_URL, businessKey).then((response) => {
         if (response.success) {
           if (response && response.data && response.data.data.length > 0) {
-            let rows = [];
+            let rows:any = [];
             response.data.data.forEach((comment) => {
               rows.push(
                 createData(
@@ -281,7 +281,9 @@ export default function Comments({ selectedTask, businessKey }) {
           <AppBar
             position="relative"
             color="transparent"
-            variant="dense"
+            // only elevation or outlined allowe
+            // variant="dense"
+            variant="elevation"
             className={"buyer-head"}
           >
             <Toolbar>
@@ -322,7 +324,7 @@ export default function Comments({ selectedTask, businessKey }) {
                         <div>
                           <form>
                             <textarea
-                              type="text"
+                              // type="text"
                               className=""
                               name="message"
                               ref={inputRef}
@@ -365,12 +367,12 @@ export default function Comments({ selectedTask, businessKey }) {
 
           <div style={{ position: "relative" }}>
             {loading && <Loader position={"absolute"} />}
-            <Paper className={classes.root + " comments-table"} elevation0>
+            <Paper className={classes.root + " comments-table"} elevation={0}>
               <TableContainer className={classes.container}>
                 <Table stickyHeader aria-label="sticky table">
                   <TableHead>
                     <TableRow>
-                      {columns.map((column) => (
+                      {columns.map((column:any) => (
                         <TableCell
                           key={column.id}
                           align={column.align}
@@ -387,7 +389,7 @@ export default function Comments({ selectedTask, businessKey }) {
                         page * rowsPerPage,
                         page * rowsPerPage + rowsPerPage
                       )
-                      .map((row) => {
+                      .map((row:any) => {
                         return (
                           <TableRow
                             hover
@@ -395,7 +397,7 @@ export default function Comments({ selectedTask, businessKey }) {
                             tabIndex={-1}
                             key={row.code}
                           >
-                            {columns.map((column) => {
+                            {columns.map((column:any) => {
                               const value = row[column.id];
                               return (
                                 <TableCell key={column.id} align={column.align}>

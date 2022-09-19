@@ -28,12 +28,12 @@ const useStyles = theme => ({
     },
     selectEmpty: {
         marginTop: theme.spacing(2),
-    },
+    }, 
 });
 
 
 
-class TaskForm extends Component {
+class TaskForm extends Component <any, any> {
     static contextType = AppConfig
     constructor(props) {
         super(props);
@@ -94,7 +94,7 @@ class TaskForm extends Component {
         if (this.state.taskDetails && this.state.taskDetails.assignee) {
             return (
                 <div className="task-form-actions">
-                    {this.state.taskDetails.formKey ? <Button onClick={() => this.saveForm(this.state.taskDetails.id)} color="seconday" >
+                    {this.state.taskDetails.formKey ? <Button onClick={() => this.saveForm(this.state.taskDetails.id)} color="secondary" >
                         Save
                     </Button> : <span></span>}
 
@@ -223,7 +223,7 @@ class TaskForm extends Component {
         this.setState({ age: event.target.value });
     }
     render() {
-        const classes = useStyles;
+        const classes:any = useStyles;
         return (
             <div className="task-form">
                 <form noValidate autoComplete="off">

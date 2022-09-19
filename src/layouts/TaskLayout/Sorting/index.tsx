@@ -27,7 +27,9 @@ const styles = theme => ({
     }
   });
 
- class Sorting extends Component {
+declare const sessionStorage: any;
+
+ class Sorting extends Component <any, any> {
     constructor(props) {
         super(props);
         this.state = {
@@ -43,7 +45,7 @@ const styles = theme => ({
     }
 
     componentDidMount() {
-        let form = [];
+        let form:any = [];
         this.state.sortingOptionsWithVariables.map((item, index) => {
             form.push(false);
         })

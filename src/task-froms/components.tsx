@@ -1,7 +1,7 @@
 import React from "react";
-import TaskForm from "./task-form/index.js";
-import TxnDetails from "src/views/case/txn-summary/txnDetails.js";
-import TxnState from "src/views/case/txn-summary/txnState.js";
+import TaskForm from "./task-form/index";
+import TxnDetails from "src/views/case/txn-summary/txnDetails";
+import TxnState from "src/views/case/txn-summary/txnState";
 
 const Components = {
   TaskForm: TaskForm,

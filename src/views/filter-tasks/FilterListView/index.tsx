@@ -19,7 +19,9 @@ import {
 import Basename from "src/Basename";
 import AppConfig from "src/appConfig";
 
-class FilterListView extends Component {
+declare const window: any;
+
+class FilterListView extends Component <any, any> {
   static contextType = AppConfig
   constructor(props) {
     super(props);
@@ -65,7 +67,8 @@ class FilterListView extends Component {
     if (this.state.searchFlag) {
       this.getTasksCount();
       this.getTasks();
-      this.state.searchFlag = !this.state.searchFlag;
+      this.setState({searchFlag: !this.state.searchFlag})
+      // this.state.searchFlag = !this.state.searchFlag;
     }
     if (this.props.filterId && prevProps.filterId != this.props.filterId) {
       this.refreshTasks(true);
@@ -92,7 +95,8 @@ class FilterListView extends Component {
     if (this.state.refreshTasks) {
       this.getTasksCount();
       this.getTasks();
-      this.state.refreshTasks = false;
+      // this.state.refreshTasks = false;
+      this.setState({refreshTasks: false})
     }
 
     if (this.state.taskCompletedFlag) {
@@ -135,7 +139,7 @@ class FilterListView extends Component {
   }
 
   getTaskRequestBody(count = false) {
-    let query = {};
+    let query:any = {};
     query["sorting"] = [];
     //set sorting param
 
@@ -316,7 +320,7 @@ class FilterListView extends Component {
   }
 
   setTaskList(taskList) {
-    const uniqueTasks = [];
+    const uniqueTasks:any = [];
     if (taskList.length > 0 && !(this.state.page == 0)) {
       this.state.tasklist.concat(taskList).map((item) => {
         var findItem = uniqueTasks.find((x) => x.id === item.id);
@@ -493,7 +497,7 @@ class FilterListView extends Component {
                 <div className="layout-heading">
                   <div>
                     <Typography
-                      color="secondaryText"
+                      color="secondary"
                       gutterBottom
                       variant="h5"
                       style={{ display: "flex", marginTop: "3px" }}

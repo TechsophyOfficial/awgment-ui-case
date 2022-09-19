@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-import FilterListView from './index.js';
+import FilterListView from './index';
 
 export function GetId() {
     const navigate = useNavigate();

@@ -25,7 +25,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import WebAssetIcon from '@material-ui/icons/WebAsset';
 import theme from '../../../theme';
 import CheckIcon from '@material-ui/icons/Check';
-import TaskDetail from '../../../views/task/task-detail';
+import TaskDetail from '../../task/task-detail';
 import { manualStartActiviti, completeTask, claimTask, getTask } from 'src/services/camundaService';
 import { displaySuccessToast } from 'src/helpers/toast';
 import TOAST_MESSAGES from 'src/variables/toastMessages';
@@ -126,12 +126,12 @@ Tasks.propTypes = {
     list: PropTypes.array.isRequired
 };
 
-const ActivitiTasksDialog = ({ isOpen, dialogData, isEdit, openStatus, onTaskComplet, refreshTasks }) => {
+const ActivitiTasksDialog = ({ isOpen, dialogData, openStatus, onTaskComplet, refreshTasks }) => {
     const classes = useStyles()
     const [open, setOpen] = React.useState(false);
     const [taskId, setTaskId] = useState(null);
-    const [taskDetails, setTaskDetails] = useState(null);
-    const appData = useContext(AppConfig)
+    const [taskDetails, setTaskDetails]:any = useState(null);
+    const appData:any = useContext(AppConfig)
 
     useEffect(() => {
         setOpen(isOpen);
@@ -158,7 +158,7 @@ const ActivitiTasksDialog = ({ isOpen, dialogData, isEdit, openStatus, onTaskCom
     function completeSelectedTask() {
         if (taskId) {
             const BASE_URL = `${appData.appServerURL}`;
-            completeTask(this.props.taskId, BASE_URL).then(response => {
+            completeTask(taskId, BASE_URL).then(response => {
                 if (response.success) {
                     onTaskComplet();
                 }
@@ -172,7 +172,7 @@ const ActivitiTasksDialog = ({ isOpen, dialogData, isEdit, openStatus, onTaskCom
                 "userId": localStorage.getItem('currentUser')
             }
             const GATEWAY_URL = `${appData.apiGatewayUrl}`;
-            claimTask(this.props.taskId, body, GATEWAY_URL).then(response => {
+            claimTask(taskId, body, GATEWAY_URL).then(response => {
                 if (response.success) {
                     onTaskComplet();
                 }
@@ -180,13 +180,13 @@ const ActivitiTasksDialog = ({ isOpen, dialogData, isEdit, openStatus, onTaskCom
         }
     }
 
-    function refreshTaskList(type) {
+    function refreshTaskList(type?:any) {
         refreshTasks(type)
     }
 
     function getTaskDetails(taskId) {
         const BASE_URL = `${appData.appServerURL}`;
-        getTask(BASE_URL, this.props.taskId).then(response => {
+        getTask(BASE_URL, taskId).then(response => {
             if (response.success) {
                 setTaskDetails(response.data);
             }
@@ -195,7 +195,7 @@ const ActivitiTasksDialog = ({ isOpen, dialogData, isEdit, openStatus, onTaskCom
 
     return (
         <div>
-            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" classes={{ paper: classes.dialogPaper }}>
+            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" classes={{ paper: classes.dialogPaper }} className="">
                 <DialogTitle id="activiti-dialog-title" color="primary" classes={{ root: classes.dialogTitle }}>
                     {dialogData.title}
                     <CloseIcon onClick={handleClose} style={{ float: 'right' }} />

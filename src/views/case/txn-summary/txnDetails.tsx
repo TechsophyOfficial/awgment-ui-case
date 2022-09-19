@@ -1,17 +1,17 @@
-import React, { useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, {useEffect} from 'react';
+import {makeStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import './style.css';
 import theme from '../../../theme';
-import { Grid, Icon } from '@material-ui/core';
+import {Grid, Icon} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         maxWidth: 219,
-        minWidth : 219, 
+        minWidth: 219,
         borderRadius: '30px',
         display: 'inline-block',
         marginRight: '15px',
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
         visibility: 'hidden',
         top: 0,
         left: 0,
-        minHeight : 110,
+        minHeight: 110,
 
         '& .MuiCardContent-root': {
             paddingTop: 0
@@ -91,34 +91,35 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const TxnDetails = ({ selectedTask, config, isEdit, openStatus, onFilterSaved }) => {
-    const classes = useStyles()
+const TxnDetails = ({selectedTask, config, isEdit, openStatus, onFilterSaved}) => {
+    const classes = useStyles();
     useEffect(() => {
-        getVariables()
-    }, [selectedTask])
+        getVariables();
+    }, [selectedTask]);
 
     const getVariables = (flag = false) => {
-        let variables = [];
+        let variables: any = [];
         const taskVariables = config ? config.variables : [];
         taskVariables.forEach(variable => {
-            Object.keys(selectedTask.variables).forEach(function (key , index) {
-                if(!flag){
+            Object.keys(selectedTask.variables).forEach(function (key, index) {
+                if (!flag) {
                     if (variable.name == key) {
-                        variables.push({ name: key, title: variable.title, value: selectedTask.variables[key].value });
+                        variables.push({name: key, title: variable.title, value: selectedTask.variables[key].value});
                     }
                 } else {
-                    if(variables.length<4){
+                    if (variables.length < 4) {
                         if (variable.name == key) {
-                            variables.push({ name: key, title: variable.title, value: selectedTask.variables[key].value });
+                            variables.push({name: key, title: variable.title, value: selectedTask.variables[key].value});
                         }
                     }
                 }
-               
+
             });
-        })
+        });
 
         return (
-            <Grid container ml={2}>
+            // <Grid container ml={2}>
+            <Grid container>
                 {variables.map((variable) =>
                     <>
                         <Grid item lg={6} md={6} xs={12}>
@@ -127,41 +128,44 @@ const TxnDetails = ({ selectedTask, config, isEdit, openStatus, onFilterSaved })
                             </Typography>
                         </Grid>
                         <Grid item lg={6} md={6} xs={12}>
-                            <Typography color="textPrimary" variant="body2" style={{fontWeight : 400}}>
+                            <Typography color="textPrimary" variant="body2" style={{fontWeight: 400}}>
                                 {variable.value}
                             </Typography>
                         </Grid>
                     </>
                 )}
             </Grid>
-        )
-    }
+        );
+    };
 
     return (
         <div className={classes.cardHolder}>
             <Card className={classes.root + ' card-wrap'}>
                 <CardHeader className={classes.cardHeading}
                     avatar={
+                        // @ts-ignore
                         <Icon className={classes.avatar} color={theme.palette.background.white}>{config ? config.icon : 'star'}</Icon>
                     }
                     title={
-                        <Typography variant="h4" id="title"> 
+                        <Typography variant="h4" id="title">
                             {config ? config.label : ''}
                         </Typography>
                     }
                 />
                 <CardContent>
                     <div className={classes.cardContent}>
-                        <Grid container ml={2}>
+                        {/* <Grid container ml={2}> */}
+                        <Grid container>
                             {getVariables(true)}
                         </Grid>
                     </div>
                 </CardContent>
             </Card>
 
-            <Card className={classes.cardOverlay  + ' card-overlay'}>
+            <Card className={classes.cardOverlay + ' card-overlay'}>
                 <CardHeader className={classes.cardHeading}
                     avatar={
+                        // @ts-ignore
                         <Icon className={classes.avatar} color={theme.palette.background.white}>{config ? config.icon : 'star'}</Icon>
                     }
                     title={
@@ -172,7 +176,8 @@ const TxnDetails = ({ selectedTask, config, isEdit, openStatus, onFilterSaved })
                 />
                 <CardContent>
                     <div className={classes.cardContent}>
-                        <Grid container ml={2}>
+                        {/* <Grid container ml={2}> */}
+                        <Grid container>
                             {getVariables()}
                         </Grid>
                     </div>
@@ -181,6 +186,6 @@ const TxnDetails = ({ selectedTask, config, isEdit, openStatus, onFilterSaved })
 
         </div>
     );
-}
+};
 
 export default TxnDetails;

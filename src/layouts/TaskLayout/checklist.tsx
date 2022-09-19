@@ -31,6 +31,7 @@ const MyChecklists = ({ selectedTask }) => {
         display: "block",
       },
       "&::-webkit-scrollbar-thumb": {
+        // @ts-ignore
         backgroundColor: theme?.palette?.primary.main,
       },
     },
@@ -56,7 +57,7 @@ const MyChecklists = ({ selectedTask }) => {
   const classes = useStyles();
   const [checklistItemIntances, setChecklistItemIntances] = useState([]);
   const [selectedChecklistItems, setSelectedChecklistItems] = useState([]);
-  const appData = useContext(AppConfig);
+  const appData:any = useContext(AppConfig);
 
   const fetchChecklistItemInstanceById = async () => {
     const { checklistInstanceId } = selectedTask;

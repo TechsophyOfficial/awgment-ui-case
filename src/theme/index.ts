@@ -62,6 +62,7 @@ const theme = createTheme({
       main : '#DB3434'
     }
   },
+  // @ts-ignore
   shadows,
   typography
 });

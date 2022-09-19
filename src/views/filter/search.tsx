@@ -8,9 +8,12 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 // import config from '../auth/config.js'
 import './style.css'
 import { getConfig } from 'src/services/common';
+import AppConfig from "src/appConfig";
 
-class Search extends Component {
+declare const sessionStorage: any;
 
+class Search extends Component <any, any> {
+  static contextType = AppConfig;
   constructor(props) {
     super(props);
     const configJson = JSON.parse(sessionStorage.getItem('config'));
@@ -23,7 +26,7 @@ class Search extends Component {
         value: ''
       };
     } else {
-      getConfig().then(response => {
+      getConfig(this.context?.customApiServerUrl).then(response => {
         if(response.success) {
           const configJson = JSON.parse(response.data);
           sessionStorage.setItem('config', JSON.stringify(configJson));

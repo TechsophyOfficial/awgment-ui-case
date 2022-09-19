@@ -29,7 +29,7 @@ import FormLayout from "./FormLayout";
 import AppConfig from "src/appConfig";
 
 function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+  const { children, value, index, dir, ...other } = props;
 
   return (
     <div
@@ -37,6 +37,7 @@ function TabPanel(props) {
       hidden={value !== index}
       id={`full-width-tabpanel-${index}`}
       aria-labelledby={`full-width-tab-${index}`}
+      dir={dir}
       {...other}
     >
       {value === index && <Box p={0}>{children}</Box>}
@@ -46,6 +47,7 @@ function TabPanel(props) {
 
 TabPanel.propTypes = {
   children: PropTypes.node,
+  dir: PropTypes.any,
   index: PropTypes.any.isRequired,
   value: PropTypes.any.isRequired,
 };
@@ -86,15 +88,21 @@ function a11yProps(index) {
   };
 }
 
-const CaseDetails = ({ className, selectedTask, onTaskComplet, ...rest }) => {
+// interface caseDetailsProps {
+//   className? : string;
+//   selectedTask: any;
+//   onTaskComplet: () => void;
+// }
+
+const CaseDetails = ({ selectedTask, onTaskComplet }) => {
   const classes = useStyles();
   // const [taskId, setTaskId] = useState(selectedTask);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [value, setValue] = React.useState(0);
-  const [caseDetails, setCaseDetails] = React.useState(null);
+  const [caseDetails, setCaseDetails]:any = React.useState(null);
   const [loading, setLoading] = React.useState(false);
 
-  const appData = useContext(AppConfig)
+  const appData:any = useContext(AppConfig)
   useEffect(() => {
     setLoading(true);
     getCaseDetails();
@@ -250,12 +258,13 @@ const CaseDetails = ({ className, selectedTask, onTaskComplet, ...rest }) => {
 
       <AppBar
         position="relative"
-        color={theme.palette.background.default}
-        style={{ zIndex: "999" }}
+        // @ts-ignore
+        color={theme.palette.background.default} style={{ zIndex: "999" }}
       >
         <Toolbar>
           <Grid container alignItems="center" justify="center">
             <Grid item lg={5} md={3} sm={12} xs={12}>
+              {/* @ts-ignore */}
               <Typography variant="h4" style={{ fontWeight: "700" }}>
                 {" "}
                 {caseDetails ? caseDetails.businessKey : ""}
@@ -375,10 +384,6 @@ const CaseDetails = ({ className, selectedTask, onTaskComplet, ...rest }) => {
       </div>
     </div>
   );
-};
-
-CaseDetails.propTypes = {
-  className: PropTypes.string,
 };
 
 export default CaseDetails;

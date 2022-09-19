@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
-import PropTypes from 'prop-types';
 import {
   Button,
   ListItem,
@@ -23,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     textTransform: 'none',
     width: '100%',
     minWidth : 10,
+    // @ts-ignore
     color :  theme.palette.icons.menu,
     '&:hover' : {
       color :  theme.palette.primary.main,
@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
     width: '16px'
   },
   tooltip: {
+    // @ts-ignore
     backgroundColor : theme.palette.tooltip.main,
     fontSize : 12,
     fontWeight : 500,
@@ -57,7 +58,19 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const NavItem = ({
+interface NavItemProps {
+  className?: string;
+  id: string;
+  href: string;
+  click?: () => void;
+  icon: any;
+  title:string;
+  edit: boolean;
+  // onEditClick: () => void;
+  onFilterClicked?: () => void;
+}
+
+const NavItem: React.FC<NavItemProps> = ({
   className,
   id,
   href,
@@ -65,24 +78,25 @@ const NavItem = ({
   icon: Icon,
   title,
   edit,
-  onEditClick,
+  // onEditClick,
   onFilterClicked,
   ...rest
 }) => {
   const classes = useStyles();
 
   const handleDailogClick = () => {
-    onFilterClicked()
+    if (onFilterClicked) onFilterClicked()
   }
 
   const link = () => {
     if (click) {
       return (
         <Button
-        activeClassName={classes.active}
+        // activeClassName={classes.active}
         className={classes.button}
         onClick={handleDailogClick}
-        to={href}
+        // to={href}
+        href={href}
       >
       <Tooltip title={title} classes={{tooltip : classes.tooltip, arrow: classes.customArrow}} arrow placement="right-start">
       {Icon && (
@@ -129,13 +143,6 @@ const NavItem = ({
       {/* {editFilter(edit, id)} */}
     </ListItem>
   );
-};
-
-NavItem.propTypes = {
-  className: PropTypes.string,
-  href: PropTypes.string,
-  icon: PropTypes.elementType,
-  title: PropTypes.string
 };
 
 export default NavItem;

@@ -107,18 +107,17 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-
 const NavDropdown = () => {
-    const classes = useStyles();
-    const location = useLocation();
+    const classes:any = useStyles();
+    const location:any = useLocation();
     const [open, setOpen] = useState(false);
     const [edit, setEdit] = useState(null);
     const [items, setItem] = useState(itemss);
-    const filter = useSelector((state) => ({
+    const filter = useSelector((state:any) => ({
         refresh: state.filter?.refresh
     }));
     const dispatch = useDispatch();
-    const appData = useContext(AppConfig)
+    const appData:any = useContext(AppConfig)
 
     useEffect(() => {
         if (filter.refresh) {
@@ -189,7 +188,7 @@ const NavDropdown = () => {
 
 
     const onFilterSaved = (value) => {
-        let itemsArr = [...items];
+        let itemsArr:any = [...items];
         if (value && value === 'close' && edit) {
             setEdit(null)
         }
@@ -219,8 +218,7 @@ const NavDropdown = () => {
             <div className={classes.toolbar} />
             <Divider />
             <List>
-                {items.map((item, index) => (
-
+                {items.map((item:any, index) => (
                     <NavItem
                         id={item.id}
                         href={Basename(location.pathname, appData) + item.href}
@@ -228,14 +226,13 @@ const NavDropdown = () => {
                         title={item.title}
                         icon={item.icon}
                         edit={item.edit ? item.edit : false}
-                        onEditClick={handleEditClick}
+                        // onEditClick={handleEditClick}
                     />
 
                 ))}
             </List>
             <List>
-                {static_items.map((item, index) => (
-
+                {static_items.map((item:any, index) => (
                     <NavItem
                         id={item.id}
                         href={Basename(location.pathname, appData) + item.href}
@@ -244,7 +241,7 @@ const NavDropdown = () => {
                         title={item.title}
                         icon={item.icon}
                         edit={item.edit ? item.edit : false}
-                        onEditClick={handleEditClick}
+                        // onEditClick={handleEditClick}
                         onFilterClicked={handleClickOpen}
                     />
 

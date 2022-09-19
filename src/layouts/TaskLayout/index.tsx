@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Box, Grid, Typography } from "@material-ui/core";
+import React, {Component} from "react";
+import {Box, Grid, Typography} from "@material-ui/core";
 import Search from "../../views/filter/search";
 import CaseDetails from "./CaseDetails";
 import "./style.css";
@@ -20,7 +20,7 @@ import {
 } from "src/services/camundaService";
 import AppConfig from "src/appConfig";
 
-export default class TaskLayout extends Component {
+export default class TaskLayout extends Component<any, any> {
   static contextType = AppConfig;
   constructor(props) {
     super(props);
@@ -48,18 +48,20 @@ export default class TaskLayout extends Component {
     this.getTasksCount = this.getTasksCount.bind(this);
   }
 
-  componentDidMount() {
-    this.state.loading = true;
-    // this.getTasksCount();
-    // this.getTasks();
-  }
+  // componentDidMount() {
+  // this.state.loading = true;
+  // this.getTasksCount();
+  // this.getTasks();
+  // }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps: any, prevState: any) {
     if (this.state.searchFlag) {
-      this.state.loading = true;
+      // this.state.loading = true;
+      this.setState({loading: true});
       this.getTasksCount();
       this.getTasks();
-      this.state.searchFlag = !this.state.searchFlag;
+      // this.state.searchFlag = !this.state.searchFlag;
+      this.setState({searchFlag: !this.state.searchFlag});
     }
     if (prevState.selectedSortingOptions != this.state.selectedSortingOptions) {
       this.setState({
@@ -72,22 +74,25 @@ export default class TaskLayout extends Component {
       this.getTasks();
     }
     if (prevState.page != this.state.page) {
-      this.state.loading = true;
+      // this.state.loading = true;
+      this.setState({loading: true});
       this.getTasks();
     }
     if (this.state.refreshTasks) {
-      this.state.loading = true;
+      // this.state.loading = true;
+      this.setState({loading: true});
       this.getTasksCount();
       this.getTasks();
-      this.state.refreshTasks = false;
+      // this.state.refreshTasks = false;
+      this.setState({refreshTasks: false});
     }
     if (this.state.taskCompletedFlag) {
-      this.setState({ taskCompletedFlag: false });
+      this.setState({taskCompletedFlag: false});
     }
   }
 
   getRequestBody() {
-    let query = {};
+    let query: any = {};
     query["sorting"] = [];
 
     if (this.state.state == STATE_COMPLETED) {
@@ -96,7 +101,7 @@ export default class TaskLayout extends Component {
 
       if (this.state.selectedSortingOptions.length > 0) {
         this.state.selectedSortingOptions.map((value) => {
-          query.sorting.push({ sortBy: value.id, sortOrder: value.value });
+          query.sorting.push({sortBy: value.id, sortOrder: value.value});
         });
       }
 
@@ -125,7 +130,7 @@ export default class TaskLayout extends Component {
               parameters: value.parameters,
             });
           } else {
-            query.sorting.push({ sortBy: value.id, sortOrder: value.value });
+            query.sorting.push({sortBy: value.id, sortOrder: value.value});
           }
         });
       }
@@ -148,7 +153,7 @@ export default class TaskLayout extends Component {
 
       if (this.state.selectedSortingOptions.length > 0) {
         this.state.selectedSortingOptions.map((value) => {
-          query.sorting.push({ sortBy: value.id, sortOrder: value.value });
+          query.sorting.push({sortBy: value.id, sortOrder: value.value});
         });
       }
 
@@ -169,7 +174,7 @@ export default class TaskLayout extends Component {
       query["active"] = true;
       if (this.state.selectedSortingOptions.length > 0) {
         this.state.selectedSortingOptions.map((value) => {
-          query.sorting.push({ sortBy: value.id, sortOrder: value.value });
+          query.sorting.push({sortBy: value.id, sortOrder: value.value});
         });
       }
 
@@ -201,7 +206,7 @@ export default class TaskLayout extends Component {
   // get request url and method for respective api's
   getRequestObject() {
     const queryParam = this.getTaskQueryParam();
-    let request = { url: "", method: "" };
+    let request = {url: "", method: ""};
     if (this.state.state == STATE_COMPLETED) {
       request.url = `${this.context.apiGatewayUrl}/workflow/v1/task${queryParam}`;
       request.method = "POST";
@@ -293,7 +298,8 @@ export default class TaskLayout extends Component {
                   }
                 }
                 if (!response.success) {
-                  this.state.loading = false;
+                  // this.state.loading = false;
+                  this.setState({loading: false})
                   index = index + 1;
                 }
               });
@@ -313,7 +319,7 @@ export default class TaskLayout extends Component {
         }
       }
       if (!response.success) {
-        this.setState({ loading: false });
+        this.setState({loading: false});
       }
     });
     // fetch(getRequestObject.url, {
@@ -376,7 +382,7 @@ export default class TaskLayout extends Component {
 
   // set the task list and select fist one as default
   setTaskList(taskList) {
-    const uniqueTasks = [];
+    const uniqueTasks: any = [];
     if (taskList.length > 0 && !(this.state.page == 0)) {
       this.state.tasklist.concat(taskList).map((item) => {
         var findItem = uniqueTasks.find((x) => x.id === item.id);
@@ -403,18 +409,18 @@ export default class TaskLayout extends Component {
     let index = 0;
     taskList.forEach((task) => {
       if (task.caseDefinitionId) {
-        const BASE_URL = `${this.context.appServerURL}`
+        const BASE_URL = `${this.context.appServerURL}`;
         getCaseVariables(task.caseInstanceId, BASE_URL).then((response) => {
           if (response.success) {
             task["variables"] = response.data;
             index = index + 1;
             if (index == taskList.length) {
-              this.setState({ loading: false });
+              this.setState({loading: false});
               this.setTaskList(taskList);
             }
           }
           if (!response.success) {
-            this.setState({ loading: false });
+            this.setState({loading: false});
             index = index + 1;
           }
         });
@@ -441,7 +447,7 @@ export default class TaskLayout extends Component {
       } else {
         index = index + 1;
         if (index == taskList.length) {
-          this.setState({ loading: false });
+          this.setState({loading: false});
           this.setTaskList(taskList);
         }
       }
@@ -530,7 +536,7 @@ export default class TaskLayout extends Component {
 
   render() {
     return (
-      <div style={{ position: "relative" }}>
+      <div style={{position: "relative"}}>
         {this.state.loading && <Loader position="relative" />}
         <Grid container spacing={1}>
           <Grid
@@ -541,7 +547,7 @@ export default class TaskLayout extends Component {
             spacing={0}
             className="tasklist-grid"
           >
-            <Box style={{ backgroundColor: "#fff" }}>
+            <Box style={{backgroundColor: "#fff"}}>
               {/* <div className='collapse-icon'>
                 {this.getChevronicon()}
               </div> */}
@@ -553,7 +559,7 @@ export default class TaskLayout extends Component {
                 <div className="layout-heading">
                   <div>
                     <Typography
-                      color="secondaryText"
+                      // color="secondaryText"
                       gutterBottom
                       variant="h5"
                       id="title"
@@ -571,7 +577,7 @@ export default class TaskLayout extends Component {
                   }
                 />
               </div>
-              <div style={{ position: "relative" }}>
+              <div style={{position: "relative"}}>
                 <TaskList
                   tasklist={this.state.tasklist}
                   className={this.state.changeLeftGridFlag ? "hide" : ""}
