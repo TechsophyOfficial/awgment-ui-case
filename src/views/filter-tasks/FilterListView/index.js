@@ -223,7 +223,7 @@ class FilterListView extends Component {
       this.state.page * TASKS_PER_PAGE +
       "&maxResults=" +
       TASKS_PER_PAGE;
-    const BASE_URL = `${this.context.apiServerURL}`;
+    const BASE_URL = `${this.context.appServerURL}`;
     getFilterTasks(this.props.filterId, requestBody, queryParam, BASE_URL).then(
       (response) => {
         if (response.success) {

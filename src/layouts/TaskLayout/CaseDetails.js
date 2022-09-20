@@ -110,7 +110,7 @@ const CaseDetails = ({ className, selectedTask, onTaskComplet, ...rest }) => {
   // fetch the case details using case instance id
   function getCaseDetails() {
     if (selectedTask && selectedTask.caseInstanceId) {
-      const BASE_URL = `${appData.apiServerURL}`;
+      const BASE_URL = `${appData.appServerURL}`;
       getCaseInstance(selectedTask.caseInstanceId, BASE_URL).then((response) => {
         if (response.success) {
           if (response.data) {
@@ -161,7 +161,7 @@ const CaseDetails = ({ className, selectedTask, onTaskComplet, ...rest }) => {
   // complete the selected task
   const completeSelectedTask = () => {
     if (selectedTask) {
-      const BASE_URL = `${appData.apiServerURL}`;
+      const BASE_URL = `${appData.appServerURL}`;
       completeTask(selectedTask.id, BASE_URL).then((response) => {
         if (response.success) {
           displaySuccessToast(TOAST_MESSAGES.SUCCESS.TASK_COMPLETED);

@@ -121,7 +121,7 @@ class FormLayout extends Component {
 
   completeSelectedTask(taskId) {
     if (taskId) {
-      const BASE_URL = `${this.context.apiServerURL}`;
+      const BASE_URL = `${this.context.appServerURL}`;
       completeTask(this.props.taskId, BASE_URL).then((response) => {
         if (response.success) {
           window.location.reload();

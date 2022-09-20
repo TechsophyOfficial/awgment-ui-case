@@ -50,7 +50,7 @@ export default class CaseActivities extends Component {
 
     getCaseActivitiTaskList(activitiType = '') {
         if (this.state.caseInstanceId) {
-            const BASE_URL = `${this.context.apiServerURL}`;
+            const BASE_URL = `${this.context.appServerURL}`;
             getCaseActivitiTasks(this.state.caseInstanceId, BASE_URL).then(response => {
                 if(response.success) {
                     this.setActivitiTasks(response.data , activitiType);
