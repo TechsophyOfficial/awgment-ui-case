@@ -28,7 +28,7 @@ import { HISTORY_API_TIME_INTERVAL } from "src/variables/chatWidget";
 // const BASE_URL = `${process.env.REACT_APP_SERVER_URL}`;
 // const GATEWAY_URL = `${process.env.REACT_APP_API_GATEWAY_URL}`;
 
-// const BASE_URL = `${appData.apiServerURL}`;
+// const BASE_URL = `${appData.appServerURL}`;
 // const GATEWAY_URL = `${appData.apiGatewayUrl}`;
 
 export function getTask(BASE_URL, taskId) {

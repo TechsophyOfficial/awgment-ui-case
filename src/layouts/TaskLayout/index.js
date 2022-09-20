@@ -280,7 +280,7 @@ export default class TaskLayout extends Component {
         if (taskList.length > 0) {
           taskList.forEach((task) => {
             if (task.caseDefinitionId) {
-              const BASE_URL = `${this.context.apiServerURL}`;
+              const BASE_URL = `${this.context.appServerURL}`;
               getCaseDefinition(task.caseDefinitionId, BASE_URL).then((response) => {
                 if (response.success) {
                   let presponse = response.data;
