@@ -8,9 +8,9 @@ import './style.css';
 import Moment from 'react-moment';
 import Components from '../../../task-froms/components.js';
 import { getTask, completeTask, claimTask } from 'src/services/camundaService';
-
+import AppConfig from 'src/appConfig';
 export default class TaskDetail extends Component {
-
+    static contextType = AppConfig
     constructor(props) {
         super(props);
         this.state = {
@@ -36,7 +36,8 @@ export default class TaskDetail extends Component {
     }
 
     getTaskDetails() {
-        getTask(this.props.taskId).then(response => {
+        const BASE_URL = `${this.context.appServerURL}`;
+        getTask(BASE_URL, this.props.taskId).then(response => {
             if (response.success) {
                 this.setState({
                     taskDetails: response.data,
@@ -104,7 +105,8 @@ export default class TaskDetail extends Component {
 
     completeTask(taskId) {
         if (taskId) {
-            completeTask(this.props.taskId).then(response => {
+            const BASE_URL = `${this.context.appServerURL}`;
+            completeTask(this.props.taskId, BASE_URL).then(response => {
                 if (response.success) {
                     this.props.onTaskComplet();
                 }
@@ -136,8 +138,8 @@ export default class TaskDetail extends Component {
             let body = {
                 "userId": localStorage.getItem('currentUser')
             }
-
-            claimTask(this.props.taskId, body).then(response => {
+            const GATEWAY_URL = `${this.context.apiGatewayUrl}`;
+            claimTask(this.props.taskId, body, GATEWAY_URL).then(response => {
                 if (response.success) {
                     this.props.onTaskComplet();
                 }

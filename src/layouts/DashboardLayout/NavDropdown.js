@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
@@ -51,7 +51,7 @@ import { refreshFilters } from 'src/redux/actions';
 import { getFilterList } from 'src/services/camundaService';
 import Basename from 'src/Basename';
 import { PlaylistAdd } from '@material-ui/icons';
-
+import AppConfig from 'src/appConfig';
 
 
 const itemss = [
@@ -153,6 +153,7 @@ const NavDropdown = () => {
         refresh: state.filter?.refresh
     }));
     const dispatch = useDispatch();
+    const appData = useContext(AppConfig)
 
     useEffect(() => {
         if (filter.refresh) {
@@ -181,7 +182,8 @@ const NavDropdown = () => {
     };
 
     function getFilters() {
-        getFilterList().then(response => {
+        const BASE_URL = `${appData.appServerURL}`;
+        getFilterList(BASE_URL).then(response => {
             if (response.success) {
                 let itemsArr = [...itemss]
                 response.data.map(element => {
@@ -302,7 +304,7 @@ const NavDropdown = () => {
 
                     <NavItem
                         id={item.id}
-                        href={Basename(location.pathname) + item.href}
+                        href={Basename(location.pathname, appData) + item.href}
                         key={item.title}
                         title={item.title}
                         icon={item.icon}
@@ -317,7 +319,7 @@ const NavDropdown = () => {
 
                     <NavItem
                         id={item.id}
-                        href={Basename(location.pathname) + item.href}
+                        href={Basename(location.pathname, appData) + item.href}
                         click={item.click}
                         key={item.title}
                         title={item.title}

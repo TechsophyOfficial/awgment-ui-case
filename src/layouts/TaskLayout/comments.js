@@ -20,6 +20,7 @@ import Loader from "./loader";
 import { TXN_STATE_VARIABLE } from "../../variables/chatWidget";
 import { createComment } from "src/services/camundaService";
 import { getCommentsList } from "src/services/customService";
+import AppConfig from "src/appConfig";
 
 const columns = [
   // { id: 'state', label: 'State', minWidth: 170 },
@@ -112,6 +113,7 @@ export default function Comments({ selectedTask, businessKey }) {
   const inputRef = useRef(null);
   const [loading, setLoading] = React.useState(false);
   // const [businessK , setBusinessKey] = React.useState(businessK)
+  const appData = React.useContext(AppConfig);
 
   useEffect(() => {
     if (selectedTask) {
@@ -129,7 +131,8 @@ export default function Comments({ selectedTask, businessKey }) {
     setLoading(true);
     // getCommentsList()
     if (businessKey) {
-      getCommentsList(businessKey).then((response) => {
+      const BASE_URL = `${appData.apiGatewayUrl}`
+      getCommentsList(BASE_URL, businessKey).then((response) => {
         if (response.success) {
           if (response && response.data && response.data.data.length > 0) {
             let rows = [];
@@ -219,7 +222,7 @@ export default function Comments({ selectedTask, businessKey }) {
   const getState = () => {
     let state = "";
     if (selectedTask && selectedTask.variables) {
-      Object.keys(selectedTask.variables).forEach(function(key) {
+      Object.keys(selectedTask.variables).forEach(function (key) {
         if (key == TXN_STATE_VARIABLE) {
           state = selectedTask.variables[key].value;
         }
@@ -234,11 +237,12 @@ export default function Comments({ selectedTask, businessKey }) {
     let state = getState();
     commentData = state ? commentData + "|" + `${state}` : commentData;
     if (commentData) {
+      const GATEWAY_URL = `${appData.apiGatewayUrl}`
       createComment(selectedTask.id, {
         taskId: selectedTask.id,
         processInstanceId: selectedTask.processInstanceId,
         comment: commentData,
-      }).then((response) => {
+      }, GATEWAY_URL).then((response) => {
         if (response.success) {
           getComments(businessKey);
           setOpenCommentBox(null);

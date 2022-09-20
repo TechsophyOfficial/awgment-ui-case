@@ -7,7 +7,11 @@ import KeycloakWrapper from './KeycloakWrapper';
 
 
 window.renderCaseInboxMFE = (containerId, history) => {
-  ReactDOM.render(<App history={history} />, document.getElementById(containerId));
+  fetch('../case-inbox/config.json')
+    .then(async (r) => (r.json()))
+    .then((config) => {
+      ReactDOM.render(<App config={config} history={history} />, document.getElementById(containerId))
+    });
   serviceWorker.unregister();
 };
 
@@ -16,6 +20,10 @@ window.unmountCaseInboxMFE = (containerId) => {
 };
 
 if (!document.getElementById('CaseInboxMFE-container')) {
-  ReactDOM.render(<KeycloakWrapper />, document.getElementById('root'));
+  fetch('../case-inbox/config.json')
+    .then(async (r) => (r.json()))
+    .then((config) => {
+      ReactDOM.render(<KeycloakWrapper config={config} />, document.getElementById('root'));
+    })
   serviceWorker.unregister();
 }

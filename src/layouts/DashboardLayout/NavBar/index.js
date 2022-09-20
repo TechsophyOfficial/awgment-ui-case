@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
@@ -44,6 +44,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CreateFilterDailog from '../CreateFilterDailog';
 import { getFilterList } from 'src/services/camundaService';
+import AppConfig from 'src/appConfig';
 
 const itemss = [
   {
@@ -104,6 +105,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const [items, setItem] = useState(itemss);
+  const appData = useContext(AppConfig)
 
   useEffect(() => {
     if (openMobile && onMobileClose) {
@@ -116,7 +118,8 @@ const NavBar = ({ onMobileClose, openMobile }) => {
   }, [location.pathname]);
 
   function getFilters() {
-    getFilterList().then(response => {
+      const BASE_URL = `${appData.appServerURL}`;
+      getFilterList(BASE_URL).then(response => {
       if(response.success) {
         let itemsArr = [...items]
         response.data.map(filter => {

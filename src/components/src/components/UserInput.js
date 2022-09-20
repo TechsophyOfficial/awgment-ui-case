@@ -21,7 +21,9 @@ import DescIcon from './icons/DescIcon';
 import Forward from './icons/Forward';
 import BagIcon from './icons/Bag';
 import PersonIcon from './icons/Person';
+import AppConfig from '../../appConfig';
 
+const appData = React.useContext(AppConfig);
 
 
 const styles = theme => ({
@@ -117,7 +119,7 @@ class UserInput extends Component {
       }
     }
 
-    fetch(`${process.env.REACT_APP_CUSTOM_API_SERVER_URL}/case/event`, {
+    fetch(`${appData.customApiServerUrl}/case/event`, {
       "method": "POST",
       "headers": {
         "content-type": "application/json",

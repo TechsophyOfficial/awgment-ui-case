@@ -1,4 +1,3 @@
-import { PREFERENCE_ENDPOINT, THEME_ENDPOINT } from 'src/constants/endpoints';
 import invokeApiCall from 'src/helpers/apiHelper';
 import { GET } from 'src/constants/requestTypes';
 
@@ -29,8 +28,8 @@ import { GET } from 'src/constants/requestTypes';
 //     content: ThemeProps;
 // }
 
-export const PREFERENCE_API_ENDPOINT = `${process.env.REACT_APP_API_GATEWAY_URL}${PREFERENCE_ENDPOINT}`;
-export const THEME_API_ENDPOINT = `${process.env.REACT_APP_API_GATEWAY_URL}${THEME_ENDPOINT}`;
+// export const PREFERENCE_API_ENDPOINT = `${appData.apiGatewayUrl}${PREFERENCE_ENDPOINT}`;
+// export const THEME_API_ENDPOINT = `${appData.apiGatewayUrl}${THEME_ENDPOINT}`;
 
 // const getPreferenceThemeId = async (): Promise<Id | null> => {
 //     const res: ResponseProps = (await request.get(PREFERENCE_API_ENDPOINT)) as ResponseProps;
@@ -41,9 +40,10 @@ export const THEME_API_ENDPOINT = `${process.env.REACT_APP_API_GATEWAY_URL}${THE
 //     return null;
 // };
 
-export function getPreferenceThemeId() {
+export function getPreferenceThemeId(apiEndPoint) {
     return invokeApiCall({
-      endPoint: PREFERENCE_API_ENDPOINT,
+      // endPoint: PREFERENCE_API_ENDPOINT,
+      endPoint: apiEndPoint,
       apiParams: {},
       shouldShowSuccessMessage : false,
       shouldShowSuccessMessage : false,
@@ -60,12 +60,12 @@ export function getPreferenceThemeId() {
     });
   }
 
-  export function getSelectedTheme(themeId) {
+  export function getSelectedTheme(themeId, apiEndPoint) {
     // const themeId = await getPreferenceThemeId();
 
     if(themeId) {
         return invokeApiCall({
-            endPoint: THEME_API_ENDPOINT + '/' + themeId,
+            endPoint: apiEndPoint + '/' + themeId,
             apiParams: {},
             shouldShowSuccessMessage : false,
             shouldShowSuccessMessage : false,

@@ -18,7 +18,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Fade from '@material-ui/core/Fade';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import keycloak from '../../keycloak'
+import { useKeycloak } from '@react-keycloak/web';
 
 
 const useStyles = makeStyles(() => ({
@@ -43,6 +43,7 @@ const Logout = ({
 }) => {
     const classes = useStyles();
     const [notifications] = useState([]);
+    const { keycloak } = useKeycloak();
 
     function logout() {
         keycloak.logout();

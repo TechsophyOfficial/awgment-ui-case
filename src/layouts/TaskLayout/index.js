@@ -20,8 +20,10 @@ import {
   getCaseDefinition,
   getCaseVariables,
 } from "src/services/camundaService";
+import AppConfig from "src/appConfig";
 
 export default class TaskLayout extends Component {
+  static contextType = AppConfig;
   constructor(props) {
     super(props);
     this.state = {
@@ -203,16 +205,16 @@ export default class TaskLayout extends Component {
     const queryParam = this.getTaskQueryParam();
     let request = { url: "", method: "" };
     if (this.state.state == STATE_COMPLETED) {
-      request.url = `${process.env.REACT_APP_API_GATEWAY_URL}/workflow/v1/task${queryParam}`;
+      request.url = `${this.context.apiGatewayUrl}/workflow/v1/task${queryParam}`;
       request.method = "POST";
     } else if (this.state.assignment == ASSIGNEE) {
-      request.url = `${process.env.REACT_APP_API_GATEWAY_URL}/workflow/v1/tasks${queryParam}`;
+      request.url = `${this.context.apiGatewayUrl}/workflow/v1/tasks${queryParam}`;
       request.method = "POST";
     } else if (this.state.assignment == CANDIDATE) {
-      request.url = `${process.env.REACT_APP_API_GATEWAY_URL}/workflow/v1/tasks${queryParam}`;
+      request.url = `${this.context.apiGatewayUrl}/workflow/v1/tasks${queryParam}`;
       request.method = "POST";
     } else {
-      request.url = `${process.env.REACT_APP_API_GATEWAY_URL}/workflow/v1/tasks${queryParam}`;
+      request.url = `${this.context.apiGatewayUrl}/workflow/v1/tasks${queryParam}`;
       request.method = "POST";
     }
 
@@ -223,13 +225,13 @@ export default class TaskLayout extends Component {
   getTasksCount() {
     let url = "";
     if (this.state.state == STATE_COMPLETED) {
-      url = `${process.env.REACT_APP_API_GATEWAY_URL}/workflow/v1/task/count`;
+      url = `${this.context.apiGatewayUrl}/workflow/v1/task/count`;
     } else if (this.state.assignment == ASSIGNEE) {
-      url = `${process.env.REACT_APP_API_GATEWAY_URL}/workflow/v1/tasks/count`;
+      url = `${this.context.apiGatewayUrl}/workflow/v1/tasks/count`;
     } else if (this.state.assignment == CANDIDATE) {
-      url = `${process.env.REACT_APP_API_GATEWAY_URL}/workflow/v1/tasks/count`;
+      url = `${this.context.apiGatewayUrl}/workflow/v1/tasks/count`;
     } else {
-      url = `${process.env.REACT_APP_API_GATEWAY_URL}/workflow/v1/tasks/count`;
+      url = `${this.context.apiGatewayUrl}/workflow/v1/tasks/count`;
     }
 
     getTasksCount(url, JSON.stringify(this.getRequestBody())).then(
@@ -278,7 +280,8 @@ export default class TaskLayout extends Component {
         if (taskList.length > 0) {
           taskList.forEach((task) => {
             if (task.caseDefinitionId) {
-              getCaseDefinition(task.caseDefinitionId).then((response) => {
+              const BASE_URL = `${this.context.appServerURL}`;
+              getCaseDefinition(task.caseDefinitionId, BASE_URL).then((response) => {
                 if (response.success) {
                   let presponse = response.data;
                   task["processName"] = presponse.name
@@ -402,7 +405,8 @@ export default class TaskLayout extends Component {
     let index = 0;
     taskList.forEach((task) => {
       if (task.caseDefinitionId) {
-        getCaseVariables(task.caseInstanceId).then((response) => {
+        const BASE_URL = `${this.context.appServerURL}`
+        getCaseVariables(task.caseInstanceId, BASE_URL).then((response) => {
           if (response.success) {
             task["variables"] = response.data;
             index = index + 1;

@@ -22,8 +22,10 @@ import {
   getFilter,
 } from "src/services/camundaService";
 import Basename from "src/Basename";
+import AppConfig from "src/appConfig";
 
 class FilterListView extends Component {
+  static contextType = AppConfig
   constructor(props) {
     super(props);
     this.state = {
@@ -104,7 +106,8 @@ class FilterListView extends Component {
   }
 
   getFilterDetails() {
-    getFilter(this.props.filterId).then((response) => {
+    const GATEWAY_URL = `${this.context.apiGatewayUrl}`;
+    getFilter(this.props.filterId, GATEWAY_URL).then((response) => {
       if (response.success) {
         this.setState({
           filterDetails: response.data,
@@ -179,7 +182,8 @@ class FilterListView extends Component {
 
   getTasksCount() {
     const requestBody = this.getTaskRequestBody(true);
-    getFilterTasksCount(this.props.filterId, requestBody).then((response) => {
+    const GATEWAY_URL = `${this.context.apiGatewayUrl}`;
+    getFilterTasksCount(this.props.filterId, requestBody, GATEWAY_URL).then((response) => {
       if (response.success) {
         console.log(response);
         this.setState({
@@ -219,7 +223,8 @@ class FilterListView extends Component {
       this.state.page * TASKS_PER_PAGE +
       "&maxResults=" +
       TASKS_PER_PAGE;
-    getFilterTasks(this.props.filterId, requestBody, queryParam).then(
+    const BASE_URL = `${this.context.appServerURL}`;
+    getFilterTasks(this.props.filterId, requestBody, queryParam, BASE_URL).then(
       (response) => {
         if (response.success) {
           let taskList = response.data;
@@ -227,7 +232,7 @@ class FilterListView extends Component {
           if (taskList.length > 0) {
             taskList.forEach((task) => {
               if (task.caseDefinitionId) {
-                getCaseDefinition(task.caseDefinitionId).then((presponse) => {
+                getCaseDefinition(task.caseDefinitionId, BASE_URL).then((presponse) => {
                   if (presponse.success) {
                     task["processName"] = presponse.data.name
                       ? presponse.data.name
@@ -343,7 +348,8 @@ class FilterListView extends Component {
     let index = 0;
     taskList.forEach((task) => {
       if (task.caseInstanceId) {
-        getCaseVariables(task.caseInstanceId).then((response) => {
+        const BASE_URL = `${this.context.appServerURL}`
+        getCaseVariables(task.caseInstanceId, BASE_URL).then((response) => {
           if (response.success) {
             task["variables"] = response.data;
             index = index + 1;
@@ -445,7 +451,7 @@ class FilterListView extends Component {
   onFilterSaved(option) {
     let url = "";
     if (option == "delete") {
-      url = Basename(window.location.href) + "/app/my-tasks";
+      url = Basename(window.location.href, this.context) + "/app/my-tasks";
       this.props.onFilterSaved(url);
     }
     if (option == "update") {

@@ -15,6 +15,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { withStyles } from '@material-ui/styles';
 import { saveTaskForm, claimTask, completeTask, getTask } from 'src/services/camundaService';
+import AppConfig from 'src/appConfig';
 
 
 // const useStyles = makeStyles((theme) => ({
@@ -40,6 +41,7 @@ const useStyles = theme => ({
 
 
 class TaskForm extends Component {
+    static contextType = AppConfig
     constructor(props) {
         super(props);
         this.state = {
@@ -65,7 +67,8 @@ class TaskForm extends Component {
     }
 
     getTaskDetails() {
-        getTask(this.props.taskId).then(response => {
+        const BASE_URL = `${this.context.appServerURL}`;
+        getTask(BASE_URL, this.props.taskId).then(response => {
             if (response.success) {
                 response.formKey = '123';
                 this.setState({
@@ -126,7 +129,8 @@ class TaskForm extends Component {
                 'name': this.state.username,
                 'age': this.state.age
             };
-            saveTaskForm(this.props.taskId, body).then(response => {
+            const GATEWAY_URL = `${this.context.apiGatewayUrl}`;
+            saveTaskForm(this.props.taskId, body, GATEWAY_URL).then(response => {
                 if (response.success) {
                     window.location.reload();
                 }
@@ -156,7 +160,8 @@ class TaskForm extends Component {
 
     completeSelectedTask(taskId) {
         if (taskId) {
-            completeTask(this.props.taskId).then(response => {
+            const BASE_URL = `${this.context.appServerURL}`;
+            completeTask(this.props.taskId, BASE_URL).then(response => {
                 if (response.success) {
                     window.location.reload();
                 }
@@ -190,7 +195,8 @@ class TaskForm extends Component {
             let body = {
                 "userId": localStorage.getItem('currentUser')
             }
-            claimTask(this.props.taskId, body).then(response => {
+            const GATEWAY_URL = `${this.context.apiGatewayUrl}`;
+            claimTask(this.props.taskId, body, GATEWAY_URL).then(response => {
                 if (response.success) {
                     window.location.reload();
                 }
