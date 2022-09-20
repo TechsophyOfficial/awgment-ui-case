@@ -13,6 +13,6 @@
     "mfeContainerBasename": "/model/caseInbox",
     "workflowEngineURL": "https://techsophy-platform.techsophy.com/camunda",
     "appServerURL": "https://techsophy-platform.techsophy.com/camunda/engine-rest",
-    "customApiServerUrl": "http://139.59.80.134:8082/process-integration/service/1.0.0",
+    "customappServerURL": "http://139.59.80.134:8082/process-integration/service/1.0.0",
     "contextEngineApiUrl": "http://ce.test.sxp.techsophy.com/engine"
 }

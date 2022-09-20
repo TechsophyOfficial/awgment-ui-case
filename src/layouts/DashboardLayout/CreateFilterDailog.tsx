@@ -415,7 +415,7 @@ const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
     function updateFilterDetails() {
         const query = generateQuery();
         if (query && edit) {
-            const BASE_URL = `${appData.apiServerURL}`;
+            const BASE_URL = `${appData.appServerURL}`;
             updateFilter(edit, query, BASE_URL).then(response => {
                 if (response.success) {
                     openStatus(false);
@@ -494,7 +494,7 @@ const CreateFilterDailog = ({ isOpen, isEdit, openStatus, onFilterSaved }) => {
     function handleDelete() {
         if (edit) {
             setLoading(true);
-            const BASE_URL = `${appData.apiServerURL}`;
+            const BASE_URL = `${appData.appServerURL}`;
             deleteFilter(edit, BASE_URL).then(response => {
                 if (response.success) {
                     openStatus(false);
