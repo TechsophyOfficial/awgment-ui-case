@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
 import NavDropdown from './NavDropdown';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -96,7 +96,6 @@ const NavItem: React.FC<NavItemProps> = ({
         className={classes.button}
         onClick={handleDailogClick}
         // to={href}
-        href={href}
       >
       <Tooltip title={title} classes={{tooltip : classes.tooltip, arrow: classes.customArrow}} arrow placement="right-start">
       {Icon && (
