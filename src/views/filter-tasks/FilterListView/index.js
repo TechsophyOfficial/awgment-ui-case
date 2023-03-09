@@ -25,7 +25,7 @@ import Basename from "src/Basename";
 import AppConfig from "src/appConfig";
 
 class FilterListView extends Component {
-  static contextType = AppConfig
+  static contextType = AppConfig;
   constructor(props) {
     super(props);
     this.state = {
@@ -183,17 +183,19 @@ class FilterListView extends Component {
   getTasksCount() {
     const requestBody = this.getTaskRequestBody(true);
     const GATEWAY_URL = `${this.context.apiGatewayUrl}`;
-    getFilterTasksCount(this.props.filterId, requestBody, GATEWAY_URL).then((response) => {
-      if (response.success) {
-        console.log(response);
-        this.setState({
-          totalTasks: response.data.data.count,
-        });
-      }
-      // if(!response.success) {
+    getFilterTasksCount(this.props.filterId, requestBody, GATEWAY_URL).then(
+      (response) => {
+        if (response.success) {
+          console.log(response);
+          this.setState({
+            totalTasks: response.data.data.count,
+          });
+        }
+        // if(!response.success) {
 
-      // }
-    });
+        // }
+      }
+    );
 
     // fetch(`${process.env.REACT_APP_SERVER_URL}/filter/${this.props.filterId}/count`, {
     //   "method": "POST",
@@ -232,18 +234,20 @@ class FilterListView extends Component {
           if (taskList.length > 0) {
             taskList.forEach((task) => {
               if (task.caseDefinitionId) {
-                getCaseDefinition(task.caseDefinitionId, BASE_URL).then((presponse) => {
-                  if (presponse.success) {
-                    task["processName"] = presponse.data.name
-                      ? presponse.data.name
-                      : presponse.data.key;
-                    task["caseKey"] = presponse.data.key;
-                    index = index + 1;
-                    if (index == taskList.length) {
-                      this.getTaskVariable(taskList);
+                getCaseDefinition(task.caseDefinitionId, BASE_URL).then(
+                  (presponse) => {
+                    if (presponse.success) {
+                      task["processName"] = presponse.data.name
+                        ? presponse.data.name
+                        : presponse.data.key;
+                      task["caseKey"] = presponse.data.key;
+                      index = index + 1;
+                      if (index == taskList.length) {
+                        this.getTaskVariable(taskList);
+                      }
                     }
                   }
-                });
+                );
               } else {
                 index = index + 1;
                 if (index == taskList.length) {
@@ -348,7 +352,7 @@ class FilterListView extends Component {
     let index = 0;
     taskList.forEach((task) => {
       if (task.caseInstanceId) {
-        const BASE_URL = `${this.context.appServerURL}`
+        const BASE_URL = `${this.context.appServerURL}`;
         getCaseVariables(task.caseInstanceId, BASE_URL).then((response) => {
           if (response.success) {
             task["variables"] = response.data;
@@ -476,6 +480,7 @@ class FilterListView extends Component {
   render() {
     return (
       <div style={{ position: "relative" }}>
+        {console.log(this.state.filterDetails)}
         {this.state.loading && <Loader />}
         <Grid container spacing={1}>
           <Grid
@@ -505,7 +510,7 @@ class FilterListView extends Component {
                     >
                       <span>
                         {this.state.filterDetails
-                          ? this.state.filterDetails.name
+                          ? this.state.filterDetails.data.name
                           : "Filter"}{" "}
                         ({this.state.totalTasks})
                       </span>

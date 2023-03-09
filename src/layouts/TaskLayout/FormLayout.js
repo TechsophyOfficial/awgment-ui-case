@@ -26,6 +26,7 @@ import "./style.css";
 import { displaySuccessToast, displayErrorToast } from "src/helpers/toast";
 import TOAST_MESSAGES from "src/variables/toastMessages";
 import AppConfig from "src/appConfig";
+import { createComment } from "src/services/camundaService";
 
 const useStyles = (theme) => ({
   formControl: {
@@ -38,7 +39,7 @@ const useStyles = (theme) => ({
 });
 
 class FormLayout extends Component {
-  static contextType = AppConfig
+  static contextType = AppConfig;
   constructor(props) {
     super(props);
     this.handleSubmit.bind(this);
@@ -50,6 +51,7 @@ class FormLayout extends Component {
       formVariables: null,
       taskId: this.props.taskId,
       isFormReadOnly: true,
+      selectedTaskForComment: this.props.selectedTask,
     };
   }
 
@@ -132,6 +134,7 @@ class FormLayout extends Component {
 
   handleSubmit = async (data) => {
     console.log(data);
+    console.log(this.props.selectedTask);
     this.setState({
       loading: true,
     });
@@ -153,6 +156,27 @@ class FormLayout extends Component {
             loading: false,
           });
         }
+      });
+    }
+    if (data.decision === "moreInfo") {
+      const GATEWAY_URL = `${this.context.apiGatewayUrl}`;
+      createComment(
+        this.props.selectedTask.id,
+        {
+          taskId: this.props.selectedTask.id,
+          processInstanceId: this.props.selectedTask.processInstanceId,
+          comment: data.moreInfo,
+        },
+        GATEWAY_URL
+      ).then((response) => {
+        if (response.success) {
+          // getComments(businessKey);
+          // setOpenCommentBox(null);
+          // inputRef.current.value = "";
+        }
+        // if (!response.success) {
+        //   setLoading(false);
+        // }
       });
     }
   };
